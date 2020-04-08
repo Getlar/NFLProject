@@ -32,6 +32,13 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
+        DbConnect connect = new DbConnect();
+        connect.getData();
+        Team csapat = new Team(3, "Vikings", "25");
+        connect.pushData(csapat);
+        connect.getData();
+        connect.deleteData(1);
+        connect.getData();
         launch();
     }
 
