@@ -15,4 +15,9 @@ public class DreamTeamController {
     void modifyExistingTeam() throws IOException {
         App.setRoot("modifyDreamTeam");
     }
+
+    @FXML
+    void buttonToFomenu(ActionEvent event) throws IOException {
+        App.setRoot("primary");
+    }
 }

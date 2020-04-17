@@ -1,14 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.ttbdlk.ModifyDreamTeamController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ttbdlk.ModifyDreamTeamController">
+   <children>
+      <AnchorPane layoutX="7.0" prefHeight="1080.0" prefWidth="608.0">
+         <children>
+            <Text layoutX="74.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select the team you want to modify:">
+               <font>
+                  <Font name="Gill Sans MT" size="32.0" />
+               </font>
+            </Text>
+            <TextArea layoutX="144.0" layoutY="171.0" prefHeight="655.0" prefWidth="321.0" />
+            <Button layoutX="91.0" layoutY="941.0" mnemonicParsing="false" onAction="#buttonToFomenu" prefHeight="131.0" prefWidth="425.0" style="-fx-background-radius: 50px;" text="Main Menu" textAlignment="CENTER">
+               <font>
+                  <Font name="Gill Sans MT" size="55.0" />
+               </font>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" />
+               </padding>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="615.0" prefHeight="1080.0" prefWidth="1305.0">
+         <children>
+            <Text layoutX="859.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player List:">
+               <font>
+                  <Font name="Gill Sans MT" size="32.0" />
+               </font>
+            </Text>
+            <Button layoutX="217.0" layoutY="750.0" mnemonicParsing="false" prefHeight="95.0" prefWidth="200.0" text="Add Player" AnchorPane.leftAnchor="217.0" />
+            <Button layoutX="672.0" layoutY="874.0" mnemonicParsing="false" prefHeight="95.0" prefWidth="213.0" text="Delete Player" AnchorPane.leftAnchor="672.0" AnchorPane.rightAnchor="420.0" />
+            <Button layoutX="1000.0" layoutY="874.0" mnemonicParsing="false" prefHeight="95.0" prefWidth="200.0" text="Delete Team" AnchorPane.rightAnchor="105.0" />
+            <TextArea layoutX="613.0" layoutY="142.0" prefHeight="655.0" prefWidth="633.0" AnchorPane.leftAnchor="613.0" AnchorPane.rightAnchor="59.0" />
+            <TextField layoutX="205.0" layoutY="164.0" prefHeight="25.0" prefWidth="225.0" />
+            <TextField layoutX="205.0" layoutY="235.0" prefHeight="25.0" prefWidth="225.0" />
+            <TextField layoutX="205.0" layoutY="307.0" prefHeight="25.0" prefWidth="225.0" />
+            <TextField layoutX="205.0" layoutY="377.0" prefHeight="25.0" prefWidth="225.0" />
+            <TextField layoutX="205.0" layoutY="451.0" prefHeight="25.0" prefWidth="225.0" />
+            <TextField layoutX="205.0" layoutY="528.0" prefHeight="25.0" prefWidth="225.0" />
+            <TextField layoutX="205.0" layoutY="606.0" prefHeight="25.0" prefWidth="225.0" />
+            <TextField layoutX="205.0" layoutY="681.0" prefHeight="25.0" prefWidth="225.0" />
+            <Text layoutX="306.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" AnchorPane.bottomAnchor="938.0" AnchorPane.leftAnchor="306.0" AnchorPane.rightAnchor="976.86328125" AnchorPane.topAnchor="125.0" />
+            <Text layoutX="306.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" AnchorPane.bottomAnchor="860.98828125" AnchorPane.leftAnchor="306.0" AnchorPane.rightAnchor="976.86328125" AnchorPane.topAnchor="203.05078125" />
+            <Text layoutX="306.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+            <Text layoutX="306.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+            <Text layoutX="306.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+            <Text layoutX="306.0" layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+            <Text layoutX="306.0" layoutY="581.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+            <Text layoutX="306.0" layoutY="660.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+            <Text layoutX="183.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input Player Options" AnchorPane.topAnchor="65.265625">
+               <font>
+                  <Font name="Gill Sans MT" size="32.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </children>
 </AnchorPane>
