@@ -4,9 +4,11 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
 import java.io.IOException;
+
+import static java.lang.Thread.sleep;
 
 /**
  * JavaFX App
@@ -14,10 +16,13 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
-    //Branchek létrehozva
+
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 640, 480);
+        scene = new Scene(loadFXML("loadingScreen"), 1600, 900);
+        Color c = Color.rgb(1, 51, 105);
+        scene.setFill(c);
+        stage.setFullScreen(true);
         stage.setScene(scene);
         stage.show();
     }
@@ -32,13 +37,6 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        DbConnect connect = new DbConnect();
-        connect.getData();
-        Team csapat = new Team(3, "Vikings", "25");
-        connect.pushData(csapat);
-        connect.getData();
-        connect.deleteData(1);
-        connect.getData();
         launch();
     }
 
