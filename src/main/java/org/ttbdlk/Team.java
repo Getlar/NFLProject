@@ -2,29 +2,22 @@ package org.ttbdlk;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "csapatok")
-public class Team {
+@Table(name="Teams")
+
+public class Team{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
     @Column(name = "name")
     private String name;
-    @Column(name = "age")
-    private String age;
+    @Column(name = "division")
+    private String division;
+    @Column(name = "owner")
+    private String owner;
 
-    public Team(int id, String name, String age) {
-        this.id = id;
+    public Team(String name, String division, String owner) {
         this.name = name;
-        this.age = age;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        this.division = division;
+        this.owner = owner;
     }
 
     public String getName() {
@@ -35,20 +28,28 @@ public class Team {
         this.name = name;
     }
 
-    public String getAge() {
-        return age;
+    public String getDivision() {
+        return division;
     }
 
-    public void setAge(String age) {
-        this.age = age;
+    public void setDivision(String division) {
+        this.division = division;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 
     @Override
     public String toString() {
         return "Team{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age='" + age + '\'' +
+                "name=" + name +
+                ", division='" + division + '\'' +
+                ", owner='" + owner + '\'' +
                 '}';
     }
 }
