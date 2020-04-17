@@ -72,12 +72,12 @@ public class DbConnect {
         }
     }
 
-    public void updateDataInTeams(Team team){ //csak egy függvény, ami updatel egy egész rekordot (egy csapat összes mezőjét akár, de most csak a nevét, mert elírtam egyet)
+    public void updateDataInTeams(Team team){ //csak egy függvény, ami updatel egy egész rekordot (egy csapat összes mezőjét akár, de most csak az edzőt, mert mert később adtuk hozzá)
         String name = team.getName();
         String division = team.getDivision();
         String owner = team.getOwner();
         try{
-            String query = "update teams set name = '"+name+"' where name = 'Green Byy Packers';";
+            String query = "update teams set HeadCoach = '"+name+"' where name = '"+team.getName()+"';";
             statement.execute(query);
         } catch (Exception ex){
             System.out.println("Error: "+ex);
