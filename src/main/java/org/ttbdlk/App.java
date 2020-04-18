@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  * JavaFX App
@@ -22,7 +23,7 @@ public class App extends Application {
         scene = new Scene(loadFXML("loadingScreen"), 1600, 900);
         Color c = Color.rgb(1, 51, 105);
         scene.setFill(c);
-        //stage.setFullScreen(true);
+        stage.setFullScreen(true);
         stage.setScene(scene);
         stage.show();
     }
@@ -37,8 +38,8 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        //DbConnect connect = new DbConnect();
-        //connect.getData("teams");
+        DAOImplementation connect = new DAOImplementation();
+        connect.DbConnect();
         /*
         csinálok egy Team tömböt, mert ebben a hajnali órában így tűnik a legeffektívebbnek, hogy utána egy for ciklussal feltöltsem a teams táblát
         Team[] pushingTeamsArray=new Team[32];
