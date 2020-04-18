@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,7 +19,10 @@ public class App extends Application {
     //Branchek létrehozva
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 640, 480);
+        scene = new Scene(loadFXML("loadingScreen"), 1600, 900);
+        Color c = Color.rgb(1, 51, 105);
+        scene.setFill(c);
+        //stage.setFullScreen(true);
         stage.setScene(scene);
         stage.show();
     }
@@ -33,7 +37,8 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        DbConnect connect = new DbConnect();
+        //DbConnect connect = new DbConnect();
+        //connect.getData("teams");
         /*
         csinálok egy Team tömböt, mert ebben a hajnali órában így tűnik a legeffektívebbnek, hogy utána egy for ciklussal feltöltsem a teams táblát
         Team[] pushingTeamsArray=new Team[32];
@@ -55,7 +60,6 @@ public class App extends Application {
 
         //a Players tábla feltöltése
         //connect.pushDataToPlayers(pushingPlayersArray[i]);
-
         launch();
     }
 }
