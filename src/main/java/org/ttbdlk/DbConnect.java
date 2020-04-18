@@ -1,5 +1,9 @@
 package org.ttbdlk;
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class DbConnect {
     private Connection connection;
@@ -16,7 +20,7 @@ public class DbConnect {
             System.out.println("Error: "+ex);
         }
     }
-    public void getData(String tableName){
+  /*  public void getData(String tableName){
         try {
           String query = "select * from "+tableName;
           resultset = statement.executeQuery(query);
@@ -41,6 +45,66 @@ public class DbConnect {
             System.out.println("Error: "+ex);
         }
     }
+*/
+  // azért szedtem ezt ki mert nekünk ezekkel a getData függvényekkel vissza kell terjunk egy team vagy player listaval
+    // abban az egy fugvenyben nem tudtuk volna mert nem lehet ket visszateresi erteke
+    // ez a komment alatt levo ket fuggveny feltolt egy megfelelo tipusu listat amit majd vissza is ad
+    public ArrayList<Player> getPlayersData() {
+        ArrayList<Player> players = new ArrayList<>();
+       try {
+            String query = "select * from players";
+            resultset = statement.executeQuery(query);
+            System.out.println("Records from database");
+
+            while (resultset.next()) {
+                players.add(new Player(
+                       Integer.parseInt(resultset.getString("Pick")),
+                        resultset.getString("Name"),
+                        resultset.getString("College"),
+                        resultset.getString("Position"),
+                        LocalDate.parse(resultset.getString("DateOfBirth"), DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+                        Integer.parseInt(resultset.getString("Weight")),
+                        Integer.parseInt(resultset.getString("Height")),
+                        resultset.getString("DraftTeam")
+                ));
+                System.out.println("itt jarok");
+                String name =resultset.getString("Name");
+                String division = resultset.getString("College");
+                LocalDate owner = LocalDate.parse(resultset.getString("DateOfBirth"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                System.out.println("name: " + name + "  " + "division: " + division + " " + "owner: " + owner);
+
+           }
+        } catch (Exception ex) {
+            System.out.println("Error: " + ex);
+        }
+        return players;
+    }
+
+    public ArrayList<Team> getTeamsData() {
+        ArrayList<Team> teams = new ArrayList<>();
+        try {
+            String query = "select * from teams";
+            resultset = statement.executeQuery(query);
+            System.out.println("Records from database");
+            while (resultset.next()) {
+                teams.add(new Team(
+                        resultset.getString("name"),
+                        resultset.getString("division"),
+                        resultset.getString("headCoach"),
+                        resultset.getString("owner")
+                        ));
+
+                String name = resultset.getString("name");
+                String division = resultset.getString("division");
+                String owner = resultset.getString("owner");
+                System.out.println("name: " + name + "  " + "division: " + division + " " + "owner: " + owner);
+
+            }
+        } catch (Exception ex) {
+            System.out.println("Error: " + ex);
+        }
+        return teams;
+    }
 
     public void pushDataToTeams(Team team){//without badge
         String name = team.getName();
@@ -59,7 +123,7 @@ public class DbConnect {
         String name=player.getName();
         String college= player.getCollege();
         String position=player.getPosition();
-        Date dateOfBirth=player.getDateOfBirth();
+        LocalDate dateOfBirth=player.getDateOfBirth();
         int weight=player.getWeight();
         int height=player.getHeight();
         String draftTeam=player.getDraftTeam();

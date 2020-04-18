@@ -22,7 +22,7 @@ public class App extends Application {
         scene = new Scene(loadFXML("loadingScreen"), 1600, 900);
         Color c = Color.rgb(1, 51, 105);
         scene.setFill(c);
-        stage.setFullScreen(true);
+        //stage.setFullScreen(true);
         stage.setScene(scene);
         stage.show();
     }

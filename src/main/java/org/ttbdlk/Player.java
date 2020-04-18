@@ -1,6 +1,8 @@
 package org.ttbdlk;
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.util.Locale;
 
 @Entity
 @Table(name="Players")
@@ -17,7 +19,7 @@ public class Player {
     @Column(name = "Position")
     private String position;
     @Column(name = "DateOfBirth")
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
     @Column(name = "Weight")
     private int weight;
     @Column(name = "Height")
@@ -27,7 +29,7 @@ public class Player {
     /*@Column(name = "Picture")
     private Date ;*/
 
-    public Player(int pick, String name, String college, String position, Date dateOfBirth, int weight, int height, String draftTeam) {
+    public Player(int pick, String name, String college, String position, LocalDate dateOfBirth, int weight, int height, String draftTeam) {
         this.pick = pick;
         this.name = name;
         this.college = college;
@@ -70,11 +72,11 @@ public class Player {
         this.position = position;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

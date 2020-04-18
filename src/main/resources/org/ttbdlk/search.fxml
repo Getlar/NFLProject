@@ -8,10 +8,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ttbdlk.SearchController">
+<AnchorPane prefHeight="991.0" prefWidth="1793.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ttbdlk.SearchController">
    <children>
-      <AnchorPane layoutX="-6.0" prefHeight="1090.0" prefWidth="425.0" style="-fx-border-color: black; -fx-background-color: grey; -fx-border-radius: 10px;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-6.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="-5.0" prefHeight="1093.0" prefWidth="451.0" style="-fx-border-color: black; -fx-background-color: grey; -fx-border-radius: 10px;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-5.0" AnchorPane.topAnchor="0.0">
          <children>
             <Button layoutX="13.0" layoutY="945.0" mnemonicParsing="false" onAction="#buttonToFomenu" prefHeight="131.0" prefWidth="425.0" style="-fx-background-radius: 50px;" text="Main Menu" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="953.0">
                <padding>
@@ -69,12 +68,12 @@
       <AnchorPane fx:id="dataAnchorPane" layoutX="446.0" prefHeight="1093.0" prefWidth="1474.0" style="-fx-background-color: rgb(1, 51, 105);">
          <children>
             <TextField fx:id="searchField" layoutX="36.0" layoutY="35.0" AnchorPane.bottomAnchor="1020.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="35.0" />
-            <Button layoutX="1346.0" layoutY="40.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Search" AnchorPane.bottomAnchor="1020.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="35.0">
+            <Button layoutX="1346.0" layoutY="40.0" mnemonicParsing="false" onAction="#handleSearchButtonClicked" prefHeight="25.0" prefWidth="94.0" text="Search" AnchorPane.bottomAnchor="1020.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="35.0">
                <font>
                   <Font name="Gill Sans MT" size="20.0" />
                </font>
             </Button>
-            <TextArea layoutX="35.0" layoutY="154.0" prefHeight="899.0" prefWidth="1406.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="154.0" />
+            <ListView fx:id="searchResultsListView" layoutX="41.0" layoutY="143.0" prefHeight="908.0" prefWidth="1419.0" />
          </children>
       </AnchorPane>
    </children>
