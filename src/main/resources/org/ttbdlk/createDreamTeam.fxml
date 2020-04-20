@@ -8,7 +8,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ttbdlk.CreateDreamTeamController">
    <children>
       <AnchorPane prefHeight="1080.0" prefWidth="686.0">
@@ -18,15 +17,15 @@
                   <Font size="41.0" />
                </font>
             </Text>
-            <TextField layoutX="269.0" layoutY="196.0" />
-            <TextField layoutX="269.0" layoutY="280.0" />
-            <TextField layoutX="269.0" layoutY="358.0" />
-            <TextField layoutX="269.0" layoutY="438.0" />
-            <Text layoutX="332.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-            <Text layoutX="332.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-            <Text layoutX="332.0" layoutY="346.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-            <Text layoutX="332.0" layoutY="428.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-            <Button layoutX="221.0" layoutY="560.0" mnemonicParsing="false" onAction="#createTeamButtonPressed" prefHeight="159.0" prefWidth="244.0" text="Create Team" />
+            <TextField fx:id="teamNameTextField" layoutX="204.0" layoutY="196.0" prefHeight="39.0" prefWidth="289.0" />
+            <TextField fx:id="teamDivisionTextField" layoutX="204.0" layoutY="280.0" prefHeight="39.0" prefWidth="289.0" />
+            <TextField fx:id="teamHeadCoachTextField" layoutX="204.0" layoutY="358.0" prefHeight="39.0" prefWidth="289.0" />
+            <TextField fx:id="teamOwnerTextField" layoutX="204.0" layoutY="438.0" prefHeight="39.0" prefWidth="289.0" />
+            <Text layoutX="295.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team Name" />
+            <Text layoutX="312.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Division" />
+            <Text layoutX="294.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Head Coach" />
+            <Text layoutX="316.0" layoutY="426.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Owner" />
+            <Button layoutX="227.0" layoutY="546.0" mnemonicParsing="false" onAction="#createTeamButtonPressed" prefHeight="159.0" prefWidth="244.0" text="Create Team" />
             <Button layoutX="153.0" layoutY="948.0" mnemonicParsing="false" onAction="#buttonToFomenu" prefHeight="131.0" prefWidth="425.0" style="-fx-background-radius: 50px;" text="Main Menu" textAlignment="CENTER">
                <font>
                   <Font name="Gill Sans MT" size="55.0" />
@@ -39,35 +38,21 @@
       </AnchorPane>
       <AnchorPane fx:id="playerAddingAP" layoutX="686.0" prefHeight="1080.0" prefWidth="1234.0">
          <children>
-            <Text layoutX="427.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player List" textAlignment="CENTER" wrappingWidth="379.13671875">
+            <Text layoutX="149.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available Players" textAlignment="CENTER" wrappingWidth="379.13671875">
                <font>
                   <Font size="41.0" />
                </font>
             </Text>
-            <TextArea layoutX="77.0" layoutY="147.0" prefHeight="200.0" prefWidth="1073.0" />
-            <Text layoutX="427.0" layoutY="454.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Player:" textAlignment="CENTER" wrappingWidth="379.13671875">
+            <Button layoutX="210.0" layoutY="875.0" mnemonicParsing="false" onAction="#handleAddButton" prefHeight="113.0" prefWidth="257.0" text="Add" />
+            <Button layoutX="505.0" layoutY="875.0" mnemonicParsing="false" onAction="#handleResetButton" prefHeight="113.0" prefWidth="257.0" text="Reset Option" />
+            <ListView fx:id="playerTextArea" layoutX="94.0" layoutY="149.0" prefHeight="688.0" prefWidth="489.0" />
+            <Text layoutX="729.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current List" textAlignment="CENTER" wrappingWidth="379.13671875">
                <font>
                   <Font size="41.0" />
                </font>
             </Text>
-            <TextField layoutX="156.0" layoutY="540.0" />
-            <TextField layoutX="156.0" layoutY="605.0" />
-            <TextField layoutX="156.0" layoutY="674.0" />
-            <TextField layoutX="156.0" layoutY="749.0" />
-            <TextField layoutX="931.0" layoutY="540.0" />
-            <TextField layoutX="931.0" layoutY="605.0" />
-            <TextField layoutX="931.0" layoutY="674.0" />
-            <TextField layoutX="931.0" layoutY="749.0" />
-            <Text layoutX="219.0" layoutY="528.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-            <Text layoutX="219.0" layoutY="595.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-            <Text layoutX="219.0" layoutY="664.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-            <Text layoutX="219.0" layoutY="737.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-            <Text layoutX="994.0" layoutY="528.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-            <Text layoutX="994.0" layoutY="595.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-            <Text layoutX="994.0" layoutY="664.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-            <Text layoutX="994.0" layoutY="737.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-            <Button layoutX="289.0" layoutY="875.0" mnemonicParsing="false" prefHeight="113.0" prefWidth="257.0" text="Add" />
-            <Button layoutX="748.0" layoutY="875.0" mnemonicParsing="false" prefHeight="113.0" prefWidth="257.0" text="Reset Optios" />
+            <ListView fx:id="playerTextArea2" layoutX="674.0" layoutY="149.0" prefHeight="688.0" prefWidth="489.0" />
+            <Button layoutX="802.0" layoutY="875.0" mnemonicParsing="false" onAction="#handleFinalizeButton" prefHeight="113.0" prefWidth="257.0" text="Finalize" />
          </children>
       </AnchorPane>
    </children>

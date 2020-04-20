@@ -86,9 +86,11 @@ public class DAOImplementation implements DAO{
         String name = team.getName();
         String division = team.getDivision();
         String owner = team.getOwner();
+        String headCoach = team.getHeadCoach();
         try{
-            String query = "insert into teams (name, division, owner) values('"+name+"', '"+division+"', '"+owner+"');";
+            String query = "insert into teams (name, division, HeadCoach, owner) values('"+name+"', '"+division+"', '"+headCoach+"', '"+owner+"');";
             statement.execute(query);
+            System.out.println("kesz");
         } catch (Exception ex){
             System.out.println("Error: "+ex);
         }

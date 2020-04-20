@@ -20,10 +20,10 @@ public class App extends Application {
     //Branchek létrehozva
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("loadingScreen"), 1600, 900);
+        scene = new Scene(loadFXML("loadingScreen"), 1920, 1080);
         Color c = Color.rgb(1, 51, 105);
         scene.setFill(c);
-        stage.setFullScreen(true);
+        //stage.setFullScreen(true);
         stage.setScene(scene);
         stage.show();
     }
