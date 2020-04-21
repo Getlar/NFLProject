@@ -1,10 +1,12 @@
 package org.ttbdlk;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -12,16 +14,18 @@ import java.io.IOException;
 public class TeamDataController {
 
     @FXML
-    private TextField headcoachTextField;
+    private Text headcoachText;
 
     @FXML
-    private TextField ownerTextField;
+    private Text ownerText;
+
+    //@FXML
+    //private TextField nameText;
 
     @FXML
-    private TextField nameTextField;
-
+    private Text divisionText;
     @FXML
-    private TextField divisionTextField;
+    private Text nameText;
 
     public static Team team;
 
@@ -30,10 +34,14 @@ public class TeamDataController {
     }
 
     public void initialize(){
-        nameTextField.setText(team.getName());
-        divisionTextField.setText(team.getDivision());
-        headcoachTextField.setText(team.getHeadCoach());
-        ownerTextField.setText(team.getOwner());
+        nameText.setText(team.getName());
+        divisionText.setText(team.getDivision());
+        headcoachText.setText(team.getHeadCoach());
+        ownerText.setText(team.getOwner());
+    }
+    @FXML
+    void handleButtonBackPushed(ActionEvent event) throws IOException {
+        App.setRoot("searchTeam");
     }
 
 }
