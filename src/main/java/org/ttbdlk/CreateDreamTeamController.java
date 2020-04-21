@@ -116,11 +116,7 @@ public class CreateDreamTeamController{
         ObservableList<Player> jatekosok = FXCollections.observableArrayList();
 
         ArrayList<Player> players = connect.GetPlayersData();
-        for (Player player : players) {
-            System.out.println(player.getName());
-            jatekosok.add(player);
-            playerTableView.setItems(jatekosok);
-        }
+        jatekosok.addAll(players);
         playerTableView.setItems(jatekosok);
         playerTableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -210,7 +206,7 @@ public class CreateDreamTeamController{
                 connect.pushDataToPlayers(player);
             }
             playerTableView2.setItems(null);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Siker!");
             alert.setHeaderText("Siker!");
             alert.setContentText("Sikeresen létrehoztad a szupercsapatodat!");
