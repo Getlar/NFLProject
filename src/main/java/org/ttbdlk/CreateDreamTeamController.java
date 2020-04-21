@@ -1,17 +1,19 @@
 package org.ttbdlk;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.PointLight;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
+import java.security.spec.RSAOtherPrimeInfo;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,6 +21,7 @@ import java.util.Date;
 public class CreateDreamTeamController{
     private final DAOImplementation connect = new DAOImplementation();
     public Player akt;
+    public Text texxt;
     @FXML
     private TextField playerNameTextField;
 
@@ -47,9 +50,6 @@ public class CreateDreamTeamController{
     private TextField playerCollegeTextField;
 
     @FXML
-    private ListView<Player> playerTextArea;
-
-    @FXML
     private AnchorPane playerAddingAP;
 
     @FXML
@@ -59,8 +59,52 @@ public class CreateDreamTeamController{
     private TextField playerDateOfBirthTextField;
 
     @FXML
-    private ListView<Player> playerTextArea2;
+    private TableView<Player> playerTableView;
 
+    @FXML
+    private TableColumn<Player, String> positionColumn;
+
+    @FXML
+    private TableColumn<Player, Integer> heightColumn;
+
+    @FXML
+    private TableColumn<Player, Integer> weightColumn;
+
+    @FXML
+    private TableColumn<Player, LocalDate> dobCollumn;
+
+    @FXML
+    private TableColumn<Player, String> nameColumn;
+
+    @FXML
+    private TableColumn<Player, String> collegeColumn;
+
+    @FXML
+    private TableColumn<Player, String> teamColumn;
+
+    @FXML
+    private TableView<Player> playerTableView2;
+
+    @FXML
+    private TableColumn<Player, String> positionColumn1;
+
+    @FXML
+    private TableColumn<Player, Integer> heightColumn1;
+
+    @FXML
+    private TableColumn<Player, Integer> weightColumn1;
+
+    @FXML
+    private TableColumn<Player, LocalDate> dobCollumn1;
+
+    @FXML
+    private TableColumn<Player, String> nameColumn1;
+
+    @FXML
+    private TableColumn<Player, String> collegeColumn1;
+
+    @FXML
+    private TableColumn<Player, String> teamColumn1;
 
     @FXML
     void createTeamButtonPressed()
@@ -69,42 +113,66 @@ public class CreateDreamTeamController{
         Team tmp = new Team(teamNameTextField.getText(),teamDivisionTextField.getText(),teamOwnerTextField.getText(),teamHeadCoachTextField.getText());
         connect.pushDataToTeams(tmp);
         playerAddingAP.setVisible(true);
+        ObservableList<Player> jatekosok = FXCollections.observableArrayList();
+
         ArrayList<Player> players = connect.GetPlayersData();
         for (Player player : players) {
             System.out.println(player.getName());
-            playerTextArea.getItems().add(player);
+            jatekosok.add(player);
+            playerTableView.setItems(jatekosok);
         }
-        playerTextArea.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        playerTableView.setItems(jatekosok);
+        playerTableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent click) {
                 if (click.getClickCount()==1){
-                    Player itemsSelected = playerTextArea.getSelectionModel().getSelectedItem();
-                    akt = itemsSelected;
-                    System.out.println(itemsSelected);
+                    Player p = playerTableView.getSelectionModel().getSelectedItem();
+                    akt = p;
                 }
             }
         });
     }
+    @FXML
+    void buttonToBack() throws IOException {
+        App.setRoot("dreamTeam");
+    }
 
     public void initialize(){
         playerAddingAP.setVisible(false);
+        nameColumn.setCellValueFactory(new PropertyValueFactory<Player,String>("name"));
+        collegeColumn.setCellValueFactory(new PropertyValueFactory<Player,String>("college"));
+        positionColumn.setCellValueFactory(new PropertyValueFactory<Player,String>("position"));
+        dobCollumn.setCellValueFactory(new PropertyValueFactory<Player,LocalDate>("dateOfBirth"));
+        weightColumn.setCellValueFactory(new PropertyValueFactory<Player,Integer>("weight"));
+        heightColumn.setCellValueFactory(new PropertyValueFactory<Player,Integer>("height"));
+        teamColumn.setCellValueFactory(new PropertyValueFactory<Player,String>("draftTeam"));
+        nameColumn1.setCellValueFactory(new PropertyValueFactory<Player,String>("name"));
+        collegeColumn1.setCellValueFactory(new PropertyValueFactory<Player,String>("college"));
+        positionColumn1.setCellValueFactory(new PropertyValueFactory<Player,String>("position"));
+        dobCollumn1.setCellValueFactory(new PropertyValueFactory<Player,LocalDate>("dateOfBirth"));
+        weightColumn1.setCellValueFactory(new PropertyValueFactory<Player,Integer>("weight"));
+        heightColumn1.setCellValueFactory(new PropertyValueFactory<Player,Integer>("height"));
+        teamColumn1.setCellValueFactory(new PropertyValueFactory<Player,String>("draftTeam"));
+        teamNameTextField.setPromptText("Team Name...");
+        teamDivisionTextField.setPromptText("Team Division...");
+        teamHeadCoachTextField.setPromptText("Team Head Coach...");
+        teamOwnerTextField.setPromptText("Team Owner...");
     }
     @FXML
     void buttonToFomenu(ActionEvent event) throws IOException {
         App.setRoot("primary");
     }
 
-
     @FXML
     void handleAddButton(ActionEvent event) {
 
         connect.DbConnect();
-        if (akt != null && playerTextArea2.getItems().size() < 12) {
-            playerTextArea2.getItems().add(akt);
-            playerTextArea.getItems().remove(akt);
+        if (akt != null && playerTableView2.getItems().size() < 12) {
+            playerTableView2.getItems().add(akt);
+            playerTableView.getItems().remove(akt);
             akt = null;
         }
-        if (playerTextArea2.getItems().size() == 12){
+        else if (playerTableView2.getItems().size() == 12){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Too Many Players");
             alert.setHeaderText("Too Many Players");
@@ -115,11 +183,39 @@ public class CreateDreamTeamController{
 
     @FXML
     void handleResetButton(ActionEvent event) {
-        playerTextArea.getItems().add(playerTextArea2.getItems().get(playerTextArea2.getItems().size()-1));
-        playerTextArea2.getItems().remove(playerTextArea2.getItems().get(playerTextArea2.getItems().size()-1));
+        if (playerTableView2.getItems().size()!=0) {
+            playerTableView.getItems().add(playerTableView2.getItems().get(playerTableView2.getItems().size() - 1));
+            playerTableView2.getItems().remove(playerTableView2.getItems().get(playerTableView2.getItems().size() - 1));
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("No Players Left");
+            alert.setHeaderText("No Players Left");
+            alert.setContentText("There are no players left in your Dream Team!");
+            alert.showAndWait();
+        }
     }
     @FXML
-    void handleFinalizeButton(ActionEvent event) {
-
+    void handleFinalizeButton(ActionEvent event) throws IOException {
+        if (playerTableView2.getItems().size()!=12){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Not Enough Players");
+            alert.setHeaderText("Not Enough Players");
+            alert.setContentText("You must select at least 12 players to complete your team!");
+            alert.showAndWait();
+        }else{
+            DAOImplementation connect = new DAOImplementation();
+            connect.DbConnect();
+            for (Player player :playerTableView2.getItems()
+                 ) {
+                connect.pushDataToPlayers(player);
+            }
+            playerTableView2.setItems(null);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Siker!");
+            alert.setHeaderText("Siker!");
+            alert.setContentText("Sikeresen létrehoztad a szupercsapatodat!");
+            alert.showAndWait();
+            App.setRoot("dreamTeam");
+        }
     }
 }

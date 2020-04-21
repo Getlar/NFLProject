@@ -4,12 +4,11 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.util.ArrayList;
 
 /**
  * JavaFX App
@@ -20,9 +19,12 @@ public class App extends Application {
     //Branchek létrehozva
     @Override
     public void start(Stage stage) throws IOException {
+        stage.setTitle("The NFL Project");
         scene = new Scene(loadFXML("loadingScreen"), 1920, 1080);
         Color c = Color.rgb(1, 51, 105);
         scene.setFill(c);
+        scene.getStylesheets().add(getClass().getResource("faszom.css").toExternalForm());
+        stage.getIcons().add(new Image("logo.png"));
         //stage.setFullScreen(true);
         stage.setScene(scene);
         stage.show();
