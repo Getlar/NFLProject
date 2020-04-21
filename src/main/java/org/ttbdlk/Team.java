@@ -56,11 +56,6 @@ public class Team{
 
     @Override
     public String toString() {
-        return "Team{" +
-                "name='" + name + '\'' +
-                ", division='" + division + '\'' +
-                ", headCoach='" + headCoach + '\'' +
-                ", owner='" + owner + '\'' +
-                '}';
+        return name + "" + division;
     }
 }
