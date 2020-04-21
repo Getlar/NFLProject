@@ -12,7 +12,12 @@
 
 <VBox alignment="CENTER" prefHeight="1080.0" prefWidth="1920.0" spacing="20.0" style="-fx-background-color: rgb(1, 51, 105);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ttbdlk.PrimaryController">
    <children>
-      <Button mnemonicParsing="false" onAction="#searchEverything" prefHeight="80.0" prefWidth="900.0" text="Search">
+      <Button mnemonicParsing="false" onAction="#handleButtonSearchForTeamsPushed" prefHeight="80.0" prefWidth="900.0" text="Search for teams">
+         <font>
+            <Font name="Gill Sans MT" size="35.0" />
+         </font>
+      </Button>
+      <Button mnemonicParsing="false" onAction="#handleButtonSearchForPlayersPushed" prefHeight="80.0" prefWidth="900.0" text="Search for players">
          <font>
             <Font name="Gill Sans MT" size="35.0" />
          </font>

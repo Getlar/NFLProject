@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="1073.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ttbdlk.SearchTeamController">
+   <children>
+      <TextField fx:id="searchTeamTextField" layoutX="343.0" layoutY="45.0" prefHeight="31.0" prefWidth="460.0" />
+      <Button layoutX="803.0" layoutY="45.0" mnemonicParsing="false" onAction="#handleButtonSearchPushed" prefHeight="31.0" prefWidth="116.0" text="Search" />
+      <Label layoutX="14.0" layoutY="14.0" text="Teams:">
+         <font>
+            <Font size="64.0" />
+         </font>
+      </Label>
+      <ListView fx:id="TeamListView" layoutX="217.0" layoutY="120.0" prefHeight="431.0" prefWidth="640.0" />
+      <Button layoutX="927.0" layoutY="520.0" mnemonicParsing="false" onAction="#handleButtonViewPushed" prefHeight="31.0" prefWidth="91.0" text="View" />
+      <Button layoutX="47.0" layoutY="536.0" mnemonicParsing="false" onAction="#handleButtonBackPushed" text="Back" />
+   </children>
+</Pane>

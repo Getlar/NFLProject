@@ -10,12 +10,12 @@
 
 <AnchorPane prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: rgb(1, 51, 105);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ttbdlk.DreamTeamController">
    <children>
-      <Button layoutX="510.0" layoutY="692.0" mnemonicParsing="false" onAction="#createDreamTeam" prefHeight="80.0" prefWidth="900.0" text="Create Dream Team" AnchorPane.bottomAnchor="420.0" AnchorPane.leftAnchor="510.0" AnchorPane.rightAnchor="510.0" AnchorPane.topAnchor="650.0">
+      <Button layoutX="510.0" layoutY="698.0" mnemonicParsing="false" onAction="#createDreamTeam" prefHeight="80.0" prefWidth="900.0" text="Create Dream Team">
          <font>
             <Font name="Gill Sans MT" size="35.0" />
          </font>
       </Button>
-      <Button layoutX="510.0" layoutY="540.0" mnemonicParsing="false" onAction="#modifyExistingTeam" prefHeight="80.0" prefWidth="900.0" text="Modify Dream Team" AnchorPane.bottomAnchor="520.0" AnchorPane.leftAnchor="510.0" AnchorPane.rightAnchor="510.0" AnchorPane.topAnchor="540.0">
+      <Button layoutX="510.0" layoutY="540.0" mnemonicParsing="false" onAction="#modifyExistingTeam" prefHeight="80.0" prefWidth="900.0" text="Modify Dream Team">
          <font>
             <Font name="Gill Sans MT" size="35.0" />
          </font>

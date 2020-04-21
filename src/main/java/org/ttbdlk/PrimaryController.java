@@ -12,9 +12,15 @@ public class PrimaryController {
     private Button createDTButton;
 
     @FXML
-    void searchEverything(ActionEvent event) throws IOException {
-        App.setRoot("search");
+    void handleButtonSearchForTeamsPushed(ActionEvent event) throws IOException {
+        App.setRoot("searchTeam");
     }
+
+    @FXML
+    void handleButtonSearchForPlayersPushed(ActionEvent event) throws IOException {
+        App.setRoot("searchPlayer");
+    }
+
 
     @FXML
     void dreamTeam(ActionEvent event) throws IOException {

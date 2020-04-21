@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ttbdlk.TeamDataController">
+   <children>
+      <TextField fx:id="nameTextField" layoutX="501.0" layoutY="58.0" prefHeight="31.0" prefWidth="304.0" />
+      <Label layoutX="258.0" layoutY="56.0" prefHeight="35.0" prefWidth="93.0" text="Name:">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="258.0" layoutY="105.0" prefHeight="35.0" prefWidth="93.0" text="Division:">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="divisionTextField" layoutX="501.0" layoutY="107.0" prefHeight="31.0" prefWidth="304.0" />
+      <Label layoutX="258.0" layoutY="147.0" prefHeight="35.0" prefWidth="141.0" text="Headcoach:">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="headcoachTextField" layoutX="501.0" layoutY="149.0" prefHeight="31.0" prefWidth="304.0" />
+      <Label layoutX="258.0" layoutY="188.0" prefHeight="35.0" prefWidth="93.0" text="Owner:">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="ownerTextField" layoutX="501.0" layoutY="190.0" prefHeight="31.0" prefWidth="304.0" />
+   </children>
+</AnchorPane>
