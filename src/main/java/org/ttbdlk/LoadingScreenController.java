@@ -18,7 +18,7 @@ public class LoadingScreenController {
 
     int x;
     String[] textek = {"Loading Database...","Initiating Players...","Waiting for David to finish Database...","Touchdown Control...","Preparing for Super Bowl..."
-            ,"Initiating Draft Sequnce","Drafting Players","Preparing for Season...", "Getting To Know The User","Finishing Off The Patriots"};
+            ,"Initiating Draft Sequnce...","Drafting Players...","Preparing for Season...", "Getting To Know The User...","Finishing Off The Patriots..."};
 
     @FXML
     public ProgressBar progressBar;

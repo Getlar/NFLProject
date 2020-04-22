@@ -24,7 +24,7 @@ public class App extends Application {
         scene = new Scene(loadFXML("loadingScreen"), 1920, 1080);
         Color c = Color.rgb(1, 51, 105);
         scene.setFill(c);
-        scene.getStylesheets().add(getClass().getResource("faszom.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
         stage.getIcons().add(new Image("logo.png"));
         //stage.setFullScreen(true);
         stage.setScene(scene);

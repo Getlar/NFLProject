@@ -21,6 +21,7 @@ import java.util.Date;
 public class CreateDreamTeamController{
     private final DAOImplementation connect = new DAOImplementation();
     public Player akt;
+    public Team toBeDreamTeam;
     public Text texxt;
     @FXML
     private TextField playerNameTextField;
@@ -111,16 +112,13 @@ public class CreateDreamTeamController{
     {
         connect.DbConnect();
         Team tmp = new Team(teamNameTextField.getText(),teamDivisionTextField.getText(),teamOwnerTextField.getText(),teamHeadCoachTextField.getText());
+        toBeDreamTeam = tmp;
         connect.pushDataToDreamTeams(tmp);
         playerAddingAP.setVisible(true);
         ObservableList<Player> jatekosok = FXCollections.observableArrayList();
 
         ArrayList<Player> players = connect.GetPlayersData();
-        for (Player player : players) {
-            System.out.println(player.getName());
-            jatekosok.add(player);
-            playerTableView.setItems(jatekosok);
-        }
+        jatekosok.addAll(players);
         playerTableView.setItems(jatekosok);
         playerTableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -207,10 +205,10 @@ public class CreateDreamTeamController{
             connect.DbConnect();
             for (Player player :playerTableView2.getItems()
                  ) {
-                //connect.pushPlayerToDreamTeam(player);
+                connect.pushPlayerToDreamTeam(toBeDreamTeam,player);
             }
             playerTableView2.setItems(null);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Siker!");
             alert.setHeaderText("Siker!");
             alert.setContentText("Sikeresen létrehoztad a szupercsapatodat!");

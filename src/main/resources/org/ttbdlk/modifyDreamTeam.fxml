@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -8,59 +9,95 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ttbdlk.ModifyDreamTeamController">
    <children>
-      <AnchorPane layoutX="7.0" prefHeight="1080.0" prefWidth="608.0">
+      <AnchorPane fx:id="playersAP" layoutX="373.0" maxHeight="1080.0" maxWidth="1551.0" minHeight="1080.0" minWidth="1429.0" prefHeight="1080.0" prefWidth="1551.0">
          <children>
-            <Text layoutX="74.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select the team you want to modify:">
+            <Text fx:id="exchangePlayerText" layoutX="619.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exchange Players" textAlignment="CENTER" wrappingWidth="610.5166015625">
                <font>
                   <Font name="Gill Sans MT" size="32.0" />
                </font>
             </Text>
-            <TextArea layoutX="144.0" layoutY="171.0" prefHeight="655.0" prefWidth="321.0" />
-            <Button layoutX="91.0" layoutY="941.0" mnemonicParsing="false" onAction="#buttonToFomenu" prefHeight="131.0" prefWidth="425.0" style="-fx-background-radius: 50px;" text="Main Menu" textAlignment="CENTER">
+            <TextField fx:id="changeTeamNameTextField" layoutX="75.0" layoutY="281.0" prefHeight="25.0" prefWidth="225.0" />
+            <TextField fx:id="changeDivisionTextField" layoutX="75.0" layoutY="465.0" prefHeight="25.0" prefWidth="225.0" />
+            <TextField fx:id="changeHeadCoachTextField" layoutX="75.0" layoutY="648.0" prefHeight="25.0" prefWidth="225.0" />
+            <TextField fx:id="changeOwnerTextField" layoutX="75.0" layoutY="822.0" prefHeight="25.0" prefWidth="225.0" />
+            <Text fx:id="teamNameText" fill="WHITE" layoutX="75.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team Name" textAlignment="CENTER" wrappingWidth="225.0" AnchorPane.bottomAnchor="799.9765625" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="1239.0" AnchorPane.topAnchor="248.1015625">
                <font>
-                  <Font name="Gill Sans MT" size="55.0" />
+                  <Font size="24.0" />
                </font>
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" />
-               </padding>
-            </Button>
+            </Text>
+            <Text fx:id="divisionText" fill="WHITE" layoutX="75.0" layoutY="458.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team Division" textAlignment="CENTER" wrappingWidth="225.0" AnchorPane.bottomAnchor="615.9765625" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="1239.0" AnchorPane.topAnchor="432.1015625">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="headCoachText" fill="WHITE" layoutX="75.0" layoutY="641.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team Head Coach" textAlignment="CENTER" wrappingWidth="225.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="ownerText" fill="WHITE" layoutX="75.0" layoutY="813.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team Owner" textAlignment="CENTER" wrappingWidth="225.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="changeTeamOptionsText" layoutX="32.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Team Options" wrappingWidth="310.0" AnchorPane.topAnchor="117.265625">
+               <font>
+                  <Font name="Gill Sans MT" size="32.0" />
+               </font>
+            </Text>
+            <TableView fx:id="exchangePlayerTableView1" layoutX="367.0" layoutY="117.0" prefHeight="775.0" prefWidth="516.0">
+              <columns>
+                <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
+                <TableColumn fx:id="collegeColumn" prefWidth="75.0" text="College" />
+                  <TableColumn fx:id="positionColumn" prefWidth="75.0" text="Pos" />
+                  <TableColumn fx:id="dobColumn" prefWidth="75.0" text="DOB" />
+                  <TableColumn fx:id="weightColumn" prefWidth="75.0" text="W" />
+                  <TableColumn fx:id="heightColumn" prefWidth="75.0" text="H" />
+                  <TableColumn fx:id="teamColumn" prefWidth="75.0" text="Team" />
+              </columns>
+            </TableView>
+            <TableView fx:id="exchangePlayerTableView" layoutX="977.0" layoutY="117.0" prefHeight="775.0" prefWidth="508.0">
+               <columns>
+                  <TableColumn fx:id="nameColumn1" prefWidth="75.0" text="Name" />
+                  <TableColumn fx:id="collegeColumn1" prefWidth="75.0" text="College" />
+                  <TableColumn fx:id="positionColumn1" prefWidth="75.0" text="Pos" />
+                  <TableColumn fx:id="dobColumn1" prefWidth="75.0" text="DOB" />
+                  <TableColumn fx:id="weightColumn1" prefWidth="75.0" text="W" />
+                  <TableColumn fx:id="heightColumn1" prefWidth="75.0" text="H" />
+                  <TableColumn fx:id="teamColumn1" prefWidth="57.0" text="Team" />
+               </columns>
+            </TableView>
+            <Button fx:id="exchangePlayerButton" layoutX="519.0" layoutY="942.0" mnemonicParsing="false" onAction="#handleExchangePlayerButton" prefHeight="95.0" prefWidth="213.0" text="Exchange Player" />
+            <Button fx:id="finalizePlayerButton" layoutX="1123.0" layoutY="942.0" mnemonicParsing="false" onAction="#handleFinalizeTeamButton" prefHeight="95.0" prefWidth="213.0" text="Finalize Team" />
+            <Text fill="WHITE" layoutX="739.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(You Can Only Exchange Up to 4 Players)" textAlignment="CENTER" wrappingWidth="371.0" />
+            <ImageView fitHeight="217.0" fitWidth="329.0" layoutX="38.0" layoutY="868.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@kepek/dreamteam.png" />
+               </image></ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="615.0" prefHeight="1080.0" prefWidth="1305.0">
+      <AnchorPane fx:id="teamsAP" maxHeight="1008.0" minHeight="1080.0" prefHeight="1080.0" prefWidth="371.0">
          <children>
-            <Text layoutX="859.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player List:">
+            <TableView fx:id="dreamTeamTableView" layoutX="39.0" layoutY="122.0" prefHeight="445.0" prefWidth="294.0">
+              <columns>
+                <TableColumn fx:id="teamNameColumn" prefWidth="75.0" text="Name" />
+                <TableColumn fx:id="teamDivColumn" prefWidth="44.0" text="Div" />
+                  <TableColumn fx:id="teamHeadCoachColumn" prefWidth="107.0" text="HeadCoach" />
+                  <TableColumn fx:id="teamOwnerColumn" prefWidth="67.0" text="Owner" />
+              </columns>
+            </TableView>
+            <Text fx:id="teamBorder1" layoutX="39.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Dream Team" textAlignment="CENTER">
                <font>
-                  <Font name="Gill Sans MT" size="32.0" />
+                  <Font size="21.0" />
                </font>
             </Text>
-            <Button layoutX="217.0" layoutY="750.0" mnemonicParsing="false" prefHeight="95.0" prefWidth="200.0" text="Add Player" AnchorPane.leftAnchor="217.0" />
-            <Button layoutX="672.0" layoutY="874.0" mnemonicParsing="false" prefHeight="95.0" prefWidth="213.0" text="Delete Player" AnchorPane.leftAnchor="672.0" AnchorPane.rightAnchor="420.0" />
-            <Button layoutX="1000.0" layoutY="874.0" mnemonicParsing="false" prefHeight="95.0" prefWidth="200.0" text="Delete Team" AnchorPane.rightAnchor="105.0" />
-            <TextArea layoutX="613.0" layoutY="142.0" prefHeight="655.0" prefWidth="633.0" AnchorPane.leftAnchor="613.0" AnchorPane.rightAnchor="59.0" />
-            <TextField layoutX="205.0" layoutY="164.0" prefHeight="25.0" prefWidth="225.0" />
-            <TextField layoutX="205.0" layoutY="235.0" prefHeight="25.0" prefWidth="225.0" />
-            <TextField layoutX="205.0" layoutY="307.0" prefHeight="25.0" prefWidth="225.0" />
-            <TextField layoutX="205.0" layoutY="377.0" prefHeight="25.0" prefWidth="225.0" />
-            <TextField layoutX="205.0" layoutY="451.0" prefHeight="25.0" prefWidth="225.0" />
-            <TextField layoutX="205.0" layoutY="528.0" prefHeight="25.0" prefWidth="225.0" />
-            <TextField layoutX="205.0" layoutY="606.0" prefHeight="25.0" prefWidth="225.0" />
-            <TextField layoutX="205.0" layoutY="681.0" prefHeight="25.0" prefWidth="225.0" />
-            <Text layoutX="306.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" AnchorPane.bottomAnchor="938.0" AnchorPane.leftAnchor="306.0" AnchorPane.rightAnchor="976.86328125" AnchorPane.topAnchor="125.0" />
-            <Text layoutX="306.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" AnchorPane.bottomAnchor="860.98828125" AnchorPane.leftAnchor="306.0" AnchorPane.rightAnchor="976.86328125" AnchorPane.topAnchor="203.05078125" />
-            <Text layoutX="306.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-            <Text layoutX="306.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-            <Text layoutX="306.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-            <Text layoutX="306.0" layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-            <Text layoutX="306.0" layoutY="581.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-            <Text layoutX="306.0" layoutY="660.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-            <Text layoutX="183.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input Player Options" AnchorPane.topAnchor="65.265625">
-               <font>
-                  <Font name="Gill Sans MT" size="32.0" />
-               </font>
-            </Text>
+            <Button fx:id="deleteSelectedTeamButton" layoutX="79.0" layoutY="729.0" mnemonicParsing="false" onAction="#handleDeleteSelectedTeamButton" prefHeight="95.0" prefWidth="213.0" text="Delete Selected Team" />
+            <Button fx:id="modifyTeamButton" layoutX="79.0" layoutY="601.0" mnemonicParsing="false" onAction="#handleModifyTeamButton" prefHeight="95.0" prefWidth="213.0" text="Modify Selected Team" />
+            <Button fx:id="mainMenuButton" layoutY="991.0" mnemonicParsing="false" onAction="#handleMainMenuButton" prefHeight="95.0" prefWidth="213.0" text="Main Menu" />
+            <Button fx:id="backButton" layoutY="896.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="95.0" prefWidth="213.0" text="Back" />
+            <ImageView fitHeight="150.0" fitWidth="149.0" layoutX="218.0" layoutY="916.0" pickOnBounds="true" preserveRatio="true" style="-fx-image: url('logo.png');" />
          </children>
       </AnchorPane>
    </children>
