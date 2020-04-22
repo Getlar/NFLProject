@@ -73,7 +73,7 @@
                 <TableColumn fx:id="nameColumn" prefWidth="98.0" text="Name" />
                 <TableColumn fx:id="collegeColumn" prefWidth="70.0" text="College" />
                   <TableColumn fx:id="positionColumn" prefWidth="48.0" text="Pos" />
-                  <TableColumn fx:id="dobCollumn" prefWidth="78.0" text="DOB" />
+                  <TableColumn fx:id="dobColumn" prefWidth="78.0" text="DOB" />
                   <TableColumn fx:id="weightColumn" prefWidth="41.0" text="W" />
                   <TableColumn fx:id="heightColumn" minWidth="4.0" prefWidth="40.0" text="H" />
                   <TableColumn fx:id="teamColumn" prefWidth="144.0" text="Team" />
@@ -84,7 +84,7 @@
                   <TableColumn fx:id="nameColumn1" prefWidth="98.0" text="Name" />
                   <TableColumn fx:id="collegeColumn1" prefWidth="70.0" text="College" />
                   <TableColumn fx:id="positionColumn1" prefWidth="48.0" text="Pos" />
-                  <TableColumn fx:id="dobCollumn1" prefWidth="78.0" text="DOB" />
+                  <TableColumn fx:id="dobColumn1" prefWidth="78.0" text="DOB" />
                   <TableColumn fx:id="weightColumn1" prefWidth="41.0" text="W" />
                   <TableColumn fx:id="heightColumn1" prefWidth="40.0" text="H" />
                   <TableColumn fx:id="teamColumn1" prefWidth="144.0" text="Team" />
