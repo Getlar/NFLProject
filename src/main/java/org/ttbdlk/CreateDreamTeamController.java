@@ -21,6 +21,7 @@ import java.util.Date;
 public class CreateDreamTeamController{
     private final DAOImplementation connect = new DAOImplementation();
     public Player akt;
+    public Team toBeDreamTeam;
     public Text texxt;
     @FXML
     private TextField playerNameTextField;
@@ -111,6 +112,7 @@ public class CreateDreamTeamController{
     {
         connect.DbConnect();
         Team tmp = new Team(teamNameTextField.getText(),teamDivisionTextField.getText(),teamOwnerTextField.getText(),teamHeadCoachTextField.getText());
+        toBeDreamTeam = tmp;
         connect.pushDataToDreamTeams(tmp);
         playerAddingAP.setVisible(true);
         ObservableList<Player> jatekosok = FXCollections.observableArrayList();
@@ -203,7 +205,7 @@ public class CreateDreamTeamController{
             connect.DbConnect();
             for (Player player :playerTableView2.getItems()
                  ) {
-                //connect.pushPlayerToDreamTeam(player);
+                connect.pushPlayerToDreamTeam(toBeDreamTeam,player);
             }
             playerTableView2.setItems(null);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

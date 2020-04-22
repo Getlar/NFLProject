@@ -1,3 +1,5 @@
+
+/* Create Dream Team Options */
 #kisImage{
     -fx-background-image: url("kepek/apu.png");
     -fx-background-size: 347 559;
@@ -162,7 +164,7 @@
      -fx-background-size: 1920 1080;
  }
 
- /* DreamTeam */
+ /* ModifyDreamTeam Options */
 #teamBorder1{
     -fx-font: 35px Tahoma;
     -fx-stroke: white;
@@ -228,3 +230,5 @@
     -fx-border-color: white;
     -fx-border-style: solid;
 }
+
+/**/

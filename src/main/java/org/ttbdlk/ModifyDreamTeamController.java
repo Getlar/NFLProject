@@ -164,8 +164,10 @@ public class ModifyDreamTeamController {
             }
         });
         connect.DbConnect();
-        //connect.GetTeamsData();
-        //kiiratas tablaba
+        ArrayList<Team> dreamTeams = connect.getDreamTeams();
+        ObservableList<Team> dream = FXCollections.observableArrayList();
+        dream.addAll(dreamTeams);
+        dreamTeamTableView.setItems(dream);
     }
 
     @FXML
@@ -176,7 +178,7 @@ public class ModifyDreamTeamController {
             exchangePlayerTableView1.getItems().remove(secondPLayer);
             exchangePlayerTableView1.getItems().add(firstPlayer);
             changeCount++;
-            //connect.exchangePlayers(firstPlayer,secondPLayer,chosen);
+            connect.exchangePlayers(chosen,firstPlayer,secondPLayer);
         }else{
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Exchange Limit Reached!");
@@ -187,14 +189,45 @@ public class ModifyDreamTeamController {
     }
 
     @FXML
-    void handleFinalizeTeamButton(ActionEvent event) {
-
+    void handleFinalizeTeamButton(ActionEvent event) throws IOException {
+        String teamName = changeTeamNameTextField.getText();
+        String teamOwner = changeOwnerTextField.getText();
+        String teamCoach = changeHeadCoachTextField.getText();
+        String teamDivision = changeDivisionTextField.getText();
+        if (teamName.equals("")){
+            teamName = chosen.getName();
+        }
+        if (teamOwner.equals("")){
+            teamOwner = chosen.getOwner();
+        }
+        if (teamCoach.equals("")){
+            teamCoach = chosen.getHeadCoach();
+        }
+        if (teamDivision.equals("")){
+            teamDivision = chosen.getDivision();
+        }
+        Team newTeam = new Team(teamName,teamDivision,teamOwner,teamCoach);
+        connect.updateDataInDreamTeams(newTeam,chosen);
+        exchangePlayerTableView1.setItems(null);
+        exchangePlayerTableView.setItems(null);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Siker!");
+        alert.setHeaderText("Siker!");
+        alert.setContentText("Sikeresen létrehoztad a szupercsapatodat!");
+        alert.showAndWait();
+        App.setRoot("dreamTeam");
     }
 
     @FXML
-    void handleDeleteSelectedTeamButton(ActionEvent event) {
+    void handleDeleteSelectedTeamButton(ActionEvent event) throws IOException {
         dreamTeamTableView.getItems().remove(chosen);
-        //connect.deleteTeamFromDreamTeam(chosen);
+        connect.deleteDreamTeam(chosen.getName());
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Siker!");
+        alert.setHeaderText("Siker!");
+        alert.setContentText("Sikeresen létrehoztad a szupercsapatodat!");
+        alert.showAndWait();
+        App.setRoot("dreamTeam");
     }
 
     @FXML
@@ -238,8 +271,9 @@ public class ModifyDreamTeamController {
         jatekosok.addAll(players);
         exchangePlayerTableView1.setItems(jatekosok);
         ArrayList<Player> dreamPlayers = new ArrayList<>();
-        dreamPlayers = connect.GetPlayersData(); //////////////
+        dreamPlayers = connect.getPlayersFromDreamTeam(chosen);
         ObservableList<Player> alomJatekosok = FXCollections.observableArrayList();
+        alomJatekosok.addAll(dreamPlayers);
         exchangePlayerTableView.setItems(alomJatekosok);
         changeTeamNameTextField.setPromptText("Change Team Name...");
         changeDivisionTextField.setPromptText("Change Division...");

@@ -112,23 +112,20 @@ public class DAOImplementation implements DAO{
         }
     }
 
-    @Override
-    public void updateDataInTeams(Team team) {
-        String name = team.getName();
-        String division = team.getDivision();
-        String owner = team.getOwner();
+    public void updateDataInDreamTeams(Team newDreamTeam, Team oldDreamTeam) {
         try{
-            String query = "UPDATE teams SET HeadCoach = '"+name+"' WHERE Name = '"+team.getName()+"';";
+            String query = "UPDATE dreamteams SET Name = '"+newDreamTeam.getName()+"', Division = '"+newDreamTeam.getDivision()+
+                    "', HeadCoach = '"+newDreamTeam.getHeadCoach()+"', Owner = '"+newDreamTeam.getOwner()+"' WHERE Name = '"+
+                    oldDreamTeam.getName()+"';";
             statement.execute(query);
         } catch (Exception ex){
             System.out.println("Error: "+ex);
         }
     }
 
-    @Override
-    public void deleteData(int name) {
+    public void deleteDreamTeam(String dreamTeamName) {
         try{
-            String query = "delete from teams where name="+name;
+            String query = "DELETE FROM dreamteams WHERE name = '"+dreamTeamName+"';";
             statement.execute(query);
         }catch (Exception ex){
             System.out.println("Error: "+ex);
@@ -224,7 +221,7 @@ public class DAOImplementation implements DAO{
                 } catch(Exception ex){
                     System.out.println("Error: "+ex);
                 }
-                query = "SELECT * FROM players WHERE id = "+actualPlayersId+";";
+                query = "SELECT * FROM players WHERE pick = "+actualPlayersId+";";
                 try {
                     resultset = statement.executeQuery(query);
                     while (resultset.next()) {
@@ -268,7 +265,6 @@ public class DAOImplementation implements DAO{
                 System.out.println("Error: "+ex);
             }
         }
-        query="UPDATE dreamteams SET ";
     }
 
   /*  public void getData(String tableName){
