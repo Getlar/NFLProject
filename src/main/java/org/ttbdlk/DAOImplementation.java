@@ -43,11 +43,6 @@ public class DAOImplementation implements DAO{
                         Integer.parseInt(resultset.getString("Height")),
                         resultset.getString("DraftTeam")
                 ));
-                System.out.println("itt jarok");
-                String name =resultset.getString("Name");
-                String division = resultset.getString("College");
-                LocalDate owner = LocalDate.parse(resultset.getString("DateOfBirth"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                System.out.println("name: " + name + "  " + "division: " + division + " " + "owner: " + owner);
 
             }
         } catch (Exception ex) {

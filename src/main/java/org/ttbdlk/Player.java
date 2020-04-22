@@ -106,6 +106,6 @@ public class Player {
 
     @Override
     public String toString() {
-        return pick + "\t\t" + name + "\t\t" + college + "\t\t" + position + "\t\t" + dateOfBirth + "\t\t" + weight + "\t\t" + height + "\t\t" + draftTeam;
+        return name;
     }
 }

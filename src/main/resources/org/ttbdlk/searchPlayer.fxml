@@ -1,14 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.ttbdlk.SearchPlayerController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="788.0" prefWidth="1533.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ttbdlk.SearchPlayerController">
+   <children>
+      <Label layoutX="44.0" layoutY="129.0" prefHeight="27.0" prefWidth="134.0" text="Sort by position:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="positionComboBox" layoutX="193.0" layoutY="130.0" onAction="#handleSelectionChangedPositionComboBox" prefWidth="150.0" />
+      <Button layoutX="367.0" layoutY="581.0" mnemonicParsing="false" onAction="#handleButtonBackPushed" text="Back" />
+      <Button layoutX="1007.0" layoutY="528.0" mnemonicParsing="false" onAction="#handleButtonViewPushed" prefHeight="31.0" prefWidth="116.0" text="View" />
+      <ListView fx:id="PlayerListView" layoutX="367.0" layoutY="130.0" onEditStart="#handleSelectionChangedPlayerListView" prefHeight="431.0" prefWidth="640.0" />
+      <Label layoutX="24.0" layoutY="24.0" text="Players:">
+         <font>
+            <Font size="64.0" />
+         </font>
+      </Label>
+      <Button layoutX="1007.0" layoutY="55.0" mnemonicParsing="false" onAction="#handleButtonSearchPushed" prefHeight="31.0" prefWidth="116.0" text="Search" />
+      <TextField fx:id="searchTeamTextField" layoutX="547.0" layoutY="55.0" onAction="#onEnter" prefHeight="31.0" prefWidth="460.0" />
+      <ComboBox fx:id="collegeComboBox" layoutX="193.0" layoutY="173.0" onAction="#handleSelectionChangedCollegeComboBox" prefWidth="150.0" />
+      <Label layoutX="44.0" layoutY="172.0" prefHeight="27.0" prefWidth="134.0" text="Sort by college:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
 </AnchorPane>
