@@ -111,7 +111,7 @@ public class CreateDreamTeamController{
     {
         connect.DbConnect();
         Team tmp = new Team(teamNameTextField.getText(),teamDivisionTextField.getText(),teamOwnerTextField.getText(),teamHeadCoachTextField.getText());
-        connect.pushDataToTeams(tmp);
+        connect.pushDataToDreamTeams(tmp);
         playerAddingAP.setVisible(true);
         ObservableList<Player> jatekosok = FXCollections.observableArrayList();
 
@@ -196,18 +196,18 @@ public class CreateDreamTeamController{
     }
     @FXML
     void handleFinalizeButton(ActionEvent event) throws IOException {
-        if (playerTableView2.getItems().size()!=12){
+        if (playerTableView2.getItems().size()!=11){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Not Enough Players");
             alert.setHeaderText("Not Enough Players");
-            alert.setContentText("You must select at least 12 players to complete your team!");
+            alert.setContentText("You must select at least 11 players to complete your team!");
             alert.showAndWait();
         }else{
             DAOImplementation connect = new DAOImplementation();
             connect.DbConnect();
             for (Player player :playerTableView2.getItems()
                  ) {
-                connect.pushDataToPlayers(player);
+                //connect.pushPlayerToDreamTeam(player);
             }
             playerTableView2.setItems(null);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
