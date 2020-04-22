@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="608.0" prefWidth="1501.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ttbdlk.PlayerDataController">
+   <children>
+      <Text fx:id="dateOfBirthText" layoutX="606.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="264.13671875">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="positionText" layoutX="606.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="264.13671875">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="collegeText" layoutX="606.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="264.13671875">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="nameText" layoutX="618.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="264.13671875">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Button layoutX="164.0" layoutY="301.0" mnemonicParsing="false" onAction="#handleButtonBackPushed" text="Back" />
+      <Label layoutX="268.0" layoutY="198.0" prefHeight="35.0" prefWidth="155.0" text="Date ofbirth:">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="268.0" layoutY="157.0" prefHeight="35.0" prefWidth="141.0" text="Position:">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="268.0" layoutY="115.0" prefHeight="35.0" prefWidth="93.0" text="College:">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="268.0" layoutY="66.0" prefHeight="35.0" prefWidth="93.0" text="Name:">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="268.0" layoutY="32.0" prefHeight="35.0" prefWidth="93.0" text="Pick:">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="268.0" layoutY="233.0" prefHeight="35.0" prefWidth="155.0" text="Weight:">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="268.0" layoutY="268.0" prefHeight="35.0" prefWidth="155.0" text="Height:">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="268.0" layoutY="303.0" prefHeight="35.0" prefWidth="155.0" text="Draft Team:">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Text fx:id="weightText" layoutX="599.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="264.13671875">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="heightText" layoutX="606.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="264.13671875">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="draftTeamText" layoutX="606.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="264.13671875">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="pickText" layoutX="606.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="264.13671875">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

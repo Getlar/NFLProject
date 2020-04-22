@@ -9,6 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 /**
  * JavaFX App
@@ -63,6 +64,10 @@ public class App extends Application {
 
         //a Players tábla feltöltése
         //connect.pushDataToPlayers(pushingPlayersArray[i]);
+        //Team tmo=new Team("Me3", "NFC South", "Hihi", "McVay");
+        //connect.pushDataToDreamTeams(tmo);
+        //Player Thomas_Ramsay=new Player(1, "Ha", "DE", "WR", LocalDate.parse("1999-04-20"), 120, 203, "Minnesota Vikings");
+        //connect.pushPlayerToDreamTeam(tmo, Thomas_Ramsay);
         launch();
     }
 }
