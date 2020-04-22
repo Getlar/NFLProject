@@ -1,9 +1,11 @@
 package org.ttbdlk;
+import javax.persistence.criteria.CriteriaBuilder;
+import java.security.spec.ECField;
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicReferenceArray;
 
 public class DAOImplementation implements DAO{
     private Connection connection;
@@ -110,31 +112,159 @@ public class DAOImplementation implements DAO{
         }
     }
 
-    @Override
-    public void updateDataInTeams(Team team) {
-        String name = team.getName();
-        String division = team.getDivision();
-        String owner = team.getOwner();
+    public void updateDataInDreamTeams(Team newDreamTeam, Team oldDreamTeam) {
         try{
-            String query = "update teams set HeadCoach = '"+name+"' where name = '"+team.getName()+"';";
+            String query = "UPDATE dreamteams SET Name = '"+newDreamTeam.getName()+"', Division = '"+newDreamTeam.getDivision()+
+                    "', HeadCoach = '"+newDreamTeam.getHeadCoach()+"', Owner = '"+newDreamTeam.getOwner()+"' WHERE Name = '"+
+                    oldDreamTeam.getName()+"';";
             statement.execute(query);
         } catch (Exception ex){
             System.out.println("Error: "+ex);
         }
     }
 
-    @Override
-    public void deleteData(int name) {
+    public void deleteDreamTeam(String dreamTeamName) {
         try{
-            String query = "delete from teams where name="+name;
+            String query = "DELETE FROM dreamteams WHERE name = '"+dreamTeamName+"';";
             statement.execute(query);
         }catch (Exception ex){
             System.out.println("Error: "+ex);
         }
     }
+
     @Override
-    public void createTable(){//valamiért nem működött
-        String query = "CREATE TABLE Teams (name VARCHAR(25) PRIMARY KEY, division varchar(10) NOT NULL, owner varchar(40) NOT NULL);";
+    public void pushDataToDreamTeams(Team newDreamTeam) {
+        try {
+            String query = "INSERT INTO dreamteams (Name, Division, HeadCoach, Owner) VALUES('" + newDreamTeam.getName() + "', '" + newDreamTeam.getHeadCoach() + "', " +
+                    "'" + newDreamTeam.getDivision() + "', '" + newDreamTeam.getOwner() + "');";
+            statement.execute(query);
+        } catch (Exception ex) {
+            System.out.println("Error: " + ex);
+        }
+    }
+
+    @Override
+    public void pushPlayerToDreamTeam(Team dreamTeam, Player player){
+        try{
+            String query="SELECT LastPlayer FROM dreamteams WHERE Name = '"+dreamTeam.getName()+"'";
+            String modifyLastPlayer;
+            int lastPlayerColumn=0;
+            resultset=statement.executeQuery(query);
+            while(resultset.next()){
+                lastPlayerColumn=resultset.getInt(1);
+            }
+            if(lastPlayerColumn==0){
+                query="UPDATE dreamteams SET Player1 ='"+player.getPick()+"' WHERE Name = '"+dreamTeam.getName()+"';";
+                modifyLastPlayer="UPDATE dreamteams SET LastPlayer ='1' WHERE Name = '"+dreamTeam.getName()+"';";
+            }
+            else{
+                lastPlayerColumn++;
+                query="UPDATE dreamteams SET Player"+lastPlayerColumn+" ='"+player.getPick()+"' WHERE Name = '"+dreamTeam.getName()+"';";
+                modifyLastPlayer="UPDATE dreamteams SET LastPlayer ='"+lastPlayerColumn+"' WHERE Name = '"+dreamTeam.getName()+"';";
+            }
+            //actually pusholás és LastPlayer módosítás
+            statement.execute(query);
+            statement.execute(modifyLastPlayer);
+        }catch (Exception ex){
+            System.out.println("Error: "+ex);
+        }
+    }
+
+    @Override
+    public int playersInTheDreamTeam(Team dreamTeam){
+        int playersSum=0;
+        try{
+            String query="SELECT LastPlayer FROM dreamteams WHERE Name = '"+dreamTeam.getName()+"';";
+            resultset=statement.executeQuery(query);
+            while(resultset.next()){
+                playersSum=resultset.getInt(1);
+            }
+        }catch (Exception ex){
+            System.out.println("Error: "+ex);
+        }
+        return playersSum;
+    }
+
+    @Override
+    public ArrayList<Team> getDreamTeams(){
+        ArrayList<Team> dreamTeams=new ArrayList<>();
+        String query="SELECT Name, Division, HeadCoach, Owner FROM dreamteams";
+        try {
+            resultset = statement.executeQuery(query);
+            while (resultset.next()) {
+                dreamTeams.add(new Team(resultset.getString("Name"),
+                        resultset.getString("Division"),
+                        resultset.getString("HeadCoach"),
+                        resultset.getString("Owner")
+                ));
+            }
+        } catch (Exception ex) {
+            System.out.println("Error: " +ex);
+        }
+        return dreamTeams;
+    }
+
+    @Override
+    public ArrayList<Player> getPlayersFromDreamTeam(Team dreamTeam){
+        ArrayList<Player> playersFromDreamTeam=new ArrayList<>();
+        String query;
+        int playersInTheDreamTeam=playersInTheDreamTeam(dreamTeam);
+        if(playersInTheDreamTeam>0) {
+            for (int i=0; i<playersInTheDreamTeam; i++) {
+                int actualPlayersId=0;
+                query="SELECT Player"+(i+1)+" FROM dreamteams WHERE Name = '"+dreamTeam.getName()+"';";
+                try{
+                    resultset=statement.executeQuery(query);
+                    while (resultset.next()){
+                        actualPlayersId=resultset.getInt(1);
+                    }
+                } catch(Exception ex){
+                    System.out.println("Error: "+ex);
+                }
+                query = "SELECT * FROM players WHERE pick = "+actualPlayersId+";";
+                try {
+                    resultset = statement.executeQuery(query);
+                    while (resultset.next()) {
+                        playersFromDreamTeam.add(new Player(actualPlayersId, resultset.getString(2), resultset.getString(3),
+                                resultset.getString(4), LocalDate.parse(resultset.getString(5)), resultset.getInt(6),
+                                resultset.getInt(7), resultset.getString(8)));
+                    }
+                } catch (Exception ex) {
+                    System.out.println("Error: " + ex);
+                }
+            }
+        }
+        else{
+            return null;
+        }
+        return playersFromDreamTeam;
+    }
+
+    @Override
+    public void exchangePlayers(Team dreamTeam, Player in, Player out){
+        int lastPlayer=playersInTheDreamTeam(dreamTeam);
+        String query;
+        int result=0;
+        for(int i=0; i<lastPlayer; i++){
+            query="SELECT 'Player"+(i+1)+"' FROM dreamteams WHERE 'Player"+(i+1)+"' = "+out.getPick()+";";
+            try{
+                resultset=statement.executeQuery(query);
+                while(resultset.next()){
+                   result=Integer.parseInt(resultset.getString(1));
+                }
+                if(result==out.getPick()){
+                    query="UPDATE dreamteams SET 'Player"+(i+1)+"' "+in.getPick()+"WHERE 'Player"+(i+1)+" = "+out.getPick()+";";
+                    try{
+                        statement.executeQuery(query);
+                    }catch (Exception ex){
+                        System.out.println("Error: "+ex);
+                    }
+                    break;
+                }
+            } catch (Exception ex){
+                System.out.println("Error: "+ex);
+            }
+        }
     }
 
   /*  public void getData(String tableName){
