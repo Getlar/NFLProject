@@ -13,13 +13,10 @@ import java.util.ArrayList;
 public class SearchPlayerController {
     @FXML
     private ListView<Player> PlayerListView;
-
     @FXML
     private ComboBox<String> collegeComboBox;
-
     @FXML
     private ComboBox<String> positionComboBox;
-
     @FXML
     private TextField searchTeamTextField;
 
@@ -48,6 +45,7 @@ public class SearchPlayerController {
         System.out.println(values.size());
         return values;
     }
+
     private ArrayList<String> sortingValuesForCollegeComboBox(){
         ArrayList<String> values = new ArrayList<>();
         for (int i = 0; i < players.size(); i++) {
@@ -74,15 +72,13 @@ public class SearchPlayerController {
         dao.DbConnect();
         players = dao.GetPlayersData();
         if(players == null){
-            SearchTeamController.alert("Something went wrong with the database!");
+            App.alertApp(Alert.AlertType.WARNING, "Database error!", "", "Something went wrong with the database!");
         }else{
             PlayerListView.getItems().clear();
             for (int i = 0; i < players.size(); i++) {
                 PlayerListView.getItems().add(players.get(i));
-
             }
         }
-
     }
 
     public void initialize()  throws IOException{
@@ -104,10 +100,12 @@ public class SearchPlayerController {
         collegeSortingValue = "none";
         positionSortingValue = "none";
     }
+
     @FXML
     void handleSelectionChangedPositionComboBox(ActionEvent event) {
         positionSortingValue = positionComboBox.getSelectionModel().getSelectedItem();
     }
+
     @FXML
     void handleSelectionChangedCollegeComboBox(ActionEvent event) {
         collegeSortingValue = collegeComboBox.getSelectionModel().getSelectedItem();
@@ -122,30 +120,22 @@ public class SearchPlayerController {
     void handleButtonViewPushed(ActionEvent event) throws IOException {
         Player _player = PlayerListView.getSelectionModel().getSelectedItem();
         if(_player == null){
-            SearchTeamController.alert("You need to select a player from the list to check it out!");
+            App.alertApp(Alert.AlertType.WARNING, "Select player!", "", "You need to select a player from the list to check it out!");
         }else{
             PlayerDataController pdc = new PlayerDataController();
             System.out.println(_player);
             pdc.passingSelectedPlayer(_player);
             App.setRoot("playerData");
         }
-
     }
 
     @FXML
-    void handleSelectionChangedPlayerListView(ActionEvent event) {
-
-    }
-
-    @FXML
-    void handleButtonSearchPushed(ActionEvent event) {
+    void handleButtonSearchPushed(ActionEvent event) throws IOException {
         String criteria = searchTeamTextField.getText();
         System.out.println(criteria);
         PlayerListView.getItems().clear();
         if(criteria.equals("") && positionSortingValue.equals("none") && collegeSortingValue.equals("none")){
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("You need to add or type some criteria to search!");
-            alert.show();
+            App.alertApp(Alert.AlertType.WARNING, "Add searching criteria!", "", "You need to add one or more criterias to search!");
         }else if(collegeSortingValue.equals("none") && positionSortingValue.equals("none")){
 
             for (int i = 0; i < players.size(); i++) {
@@ -183,8 +173,7 @@ public class SearchPlayerController {
         }
     }
 
-
-    public void onEnter(ActionEvent event) {
+    public void onEnter(ActionEvent event) throws IOException {
         handleButtonSearchPushed(event);
     }
 }

@@ -11,19 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class PrimaryController {
-
-
-    @FXML
-    private ImageView image1;
-
-    @FXML
-    private Button createDTButton;
-
-
-    public void initialize(){
-
-
-    }
+    
     @FXML
     void handleButtonSearchForTeamsPushed(ActionEvent event) throws IOException {
         App.setRoot("searchTeam");
@@ -33,7 +21,6 @@ public class PrimaryController {
     void handleButtonSearchForPlayersPushed(ActionEvent event) throws IOException {
         App.setRoot("searchPlayer");
     }
-
 
     @FXML
     void dreamTeam(ActionEvent event) throws IOException {

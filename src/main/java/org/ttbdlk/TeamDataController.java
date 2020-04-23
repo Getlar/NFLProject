@@ -20,13 +20,8 @@ public class TeamDataController {
 
     @FXML
     private Text headcoachText;
-
     @FXML
     private Text OwnerText;
-
-    //@FXML
-    //private TextField nameText;
-
     @FXML
     private Text divisionText;
     @FXML
@@ -76,11 +71,10 @@ public class TeamDataController {
                 System.out.println(team.getName());
             }
         }
-
     }
+
     @FXML
     void handleButtonBackPushed(ActionEvent event) throws IOException {
         App.setRoot("searchTeam");
     }
-
 }

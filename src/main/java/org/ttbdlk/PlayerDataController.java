@@ -55,6 +55,7 @@ public class PlayerDataController {
     {
         player = _player;
     }
+
     public void initialize(){
         System.out.println(player.getName());
         pick.setText("Pick:");
@@ -65,16 +66,16 @@ public class PlayerDataController {
         weight.setText("Weight:");
         height.setText("Height:");
         draftteam.setText("Draft team:");
-
-       pickText.setText(Integer.toString(player.getPick()));
-       nameText.setText(player.getName());
-       collegeText.setText(player.getCollege());
-       positionText.setText(player.getPosition());
-       dateOfBirthText.setText(player.getDateOfBirth().toString());
+        pickText.setText(Integer.toString(player.getPick()));
+        nameText.setText(player.getName());
+        collegeText.setText(player.getCollege());
+        positionText.setText(player.getPosition());
+        dateOfBirthText.setText(player.getDateOfBirth().toString());
         weightText.setText(Integer.toString(player.getWeight()));
         heightText.setText(Integer.toString(player.getHeight()));
         draftTeamText.setText(player.getDraftTeam());
     }
+
     @FXML
     void handleButtonBackPushed(ActionEvent event) throws IOException {
         App.setRoot("searchTeam");

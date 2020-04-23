@@ -24,13 +24,12 @@ public class SearchTeamController {
     ArrayList<Team> teams;
     String sortingValue;
 
-
     private void fillTheTeamList()  throws IOException{
         DAOImplementation dao = new DAOImplementation();
         dao.DbConnect();
         teams = dao.GetTeamsData();
         if(teams == null){
-            alert("Something went wrong with the database!");
+            App.alertApp(Alert.AlertType.WARNING, "Database error!", "", "Something went wrong with the database!");
         }else{
             TeamListView.getItems().clear();
             for (int i = 0; i < teams.size(); i++) {
@@ -53,12 +52,11 @@ public class SearchTeamController {
     }
 
     @FXML
-    void handleButtonSearchPushed(ActionEvent event) {
-        //fillTheTeamList();
+    void handleButtonSearchPushed(ActionEvent event) throws IOException {
         String criteria = searchTeamTextField.getText();
         System.out.println(criteria);
         if(criteria.equals("") && sortingValue.equals("none")){
-           alert("You need to add or type some criteria to search!");
+            App.alertApp(Alert.AlertType.WARNING, "Add searching criteria!", "", "You need to add one or more criterias to search!");
         }else if(sortingValue.equals("none")){
             TeamListView.getItems().clear();
             for (int i = 0; i < teams.size(); i++) {
@@ -80,7 +78,7 @@ public class SearchTeamController {
     void handleButtonViewPushed(ActionEvent event) throws IOException {
         Team team = TeamListView.getSelectionModel().getSelectedItem();
         if(team == null){
-            alert("You need to pick a team from the list to open it!");
+            App.alertApp(Alert.AlertType.WARNING, "Select player!", "", "You need to select a player from the list to check it out!");
         }else{
             System.out.println(team);
             TeamDataController tdc = new TeamDataController();
@@ -89,18 +87,11 @@ public class SearchTeamController {
         }
     }
 
-
     @FXML
     void handleButtonBackPushed(ActionEvent event) throws IOException {
         App.setRoot("primary");
     }
-    public void onEnter(ActionEvent event) {
+    public void onEnter(ActionEvent event) throws IOException {
         handleButtonSearchPushed(event);
-    }
-
-    public static void alert(String str){
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setContentText(str);
-        alert.show();
     }
 }
