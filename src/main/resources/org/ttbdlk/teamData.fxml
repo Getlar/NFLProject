@@ -50,5 +50,16 @@
             <Font size="24.0" />
          </font>
       </Text>
+      <TableView fx:id="TeamTableView" layoutX="454.0" layoutY="382.0" prefHeight="250.0" prefWidth="528.0">
+        <columns>
+          <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
+          <TableColumn fx:id="collegeColumn" prefWidth="75.0" text="College" />
+            <TableColumn fx:id="positionColumn" prefWidth="75.0" text="Pos" />
+            <TableColumn fx:id="dobCollumn" prefWidth="75.0" text="DOB" />
+            <TableColumn fx:id="weightColumn" prefWidth="75.0" text="W" />
+            <TableColumn fx:id="heightColumn" prefWidth="75.0" text="H" />
+            <TableColumn fx:id="teamColumn" prefWidth="75.0" text="Team" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

@@ -232,3 +232,52 @@
 }
 
 /**/
+
+/*main menu*/
+.mainMenuButtons{
+         -jfx-button-type: RAISED;
+         -fx-background-color: rgb(26,24,30);
+         -fx-text-fill: rgb(200,159,137);
+         -fx-font-size: 30px;
+         -fx-font-family: "Calibri";
+         -fx-background-radius: 20px;
+         -fx-max-width: 600px;
+         -fx-border-width: 2;
+}
+
+.mainMenu {
+    -fx-background-image: url("kepek/bgMainMenu.jpg");
+     -fx-background-position: center;
+         -fx-background-size: 1920 1080;
+}
+/*main menu*/
+/*teamsearch*/
+.teamSearch {
+     -fx-background-color: rgb(89,16,16);
+        -fx-border-style: solid;
+        -fx-border-color: black;
+        -fx-border-width: 5;
+        -fx-background-image: url("kepek/1.jpg");
+        -fx-background-position: center;
+}
+
+.teamSearchButtons{
+         -jfx-button-type: RAISED;
+         -fx-background-color: rgb(26,24,30);
+         -fx-text-fill: rgb(200,159,137);
+         -fx-font-size: 30px;
+         -fx-font-family: "Calibri";
+         -fx-background-radius: 20px;
+         -fx-max-width: 600px;
+         -fx-border-width: 2;
+}
+
+.labels{
+     -fx-font: 50px Tahoma;
+        -fx-stroke: white;
+        -fx-stroke-width: 1;
+}
+#Teams {
+    -fx-font-size: 90px;
+}
+/*teamsearch*/
