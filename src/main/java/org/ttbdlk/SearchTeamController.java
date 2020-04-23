@@ -29,10 +29,15 @@ public class SearchTeamController {
         DAOImplementation dao = new DAOImplementation();
         dao.DbConnect();
         teams = dao.GetTeamsData();
-        TeamListView.getItems().clear();
-        for (int i = 0; i < teams.size(); i++) {
-            TeamListView.getItems().add(teams.get(i));
+        if(teams == null){
+            alert("Something went wrong with the database!");
+        }else{
+            TeamListView.getItems().clear();
+            for (int i = 0; i < teams.size(); i++) {
+                TeamListView.getItems().add(teams.get(i));
+            }
         }
+
     }
 
     public void initialize(){
@@ -53,9 +58,7 @@ public class SearchTeamController {
         String criteria = searchTeamTextField.getText();
         System.out.println(criteria);
         if(criteria.equals("") && sortingValue.equals("none")){
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("You need to add or type some criteria to search!");
-            alert.show();
+           alert("You need to add or type some criteria to search!");
         }else if(sortingValue.equals("none")){
             TeamListView.getItems().clear();
             for (int i = 0; i < teams.size(); i++) {
@@ -76,10 +79,14 @@ public class SearchTeamController {
     @FXML
     void handleButtonViewPushed(ActionEvent event) throws IOException {
         Team team = TeamListView.getSelectionModel().getSelectedItem();
-        System.out.println(team);
-        TeamDataController tdc = new TeamDataController();
-        tdc.passingSelectedTeam(team);
-        App.setRoot("teamData");
+        if(team == null){
+            alert("You need to pick a team from the list to open it!");
+        }else{
+            System.out.println(team);
+            TeamDataController tdc = new TeamDataController();
+            tdc.passingSelectedTeam(team);
+            App.setRoot("teamData");
+        }
     }
 
 
@@ -91,4 +98,9 @@ public class SearchTeamController {
         handleButtonSearchPushed(event);
     }
 
+    public static void alert(String str){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setContentText(str);
+        alert.show();
+    }
 }

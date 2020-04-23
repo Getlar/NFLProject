@@ -73,18 +73,16 @@ public class SearchPlayerController {
         DAOImplementation dao = new DAOImplementation();
         dao.DbConnect();
         players = dao.GetPlayersData();
-        PlayerListView.getItems().clear();
-        for (int i = 0; i < players.size(); i++) {
-            PlayerListView.getItems().add(players.get(i));
-            System.out.println(players.get(i).getPick());
-            System.out.println(players.get(i).getName());
-            System.out.println(players.get(i).getCollege());
-            System.out.println(players.get(i).getPosition());
-            System.out.println(players.get(i).getDateOfBirth());
-            System.out.println(players.get(i).getWeight());
-            System.out.println(players.get(i).getHeight());
-            System.out.println(players.get(i).getDraftTeam());
+        if(players == null){
+            SearchTeamController.alert("Something went wrong with the database!");
+        }else{
+            PlayerListView.getItems().clear();
+            for (int i = 0; i < players.size(); i++) {
+                PlayerListView.getItems().add(players.get(i));
+
+            }
         }
+
     }
 
     public void initialize(){
@@ -123,10 +121,15 @@ public class SearchPlayerController {
     @FXML
     void handleButtonViewPushed(ActionEvent event) throws IOException {
         Player _player = PlayerListView.getSelectionModel().getSelectedItem();
-        PlayerDataController pdc = new PlayerDataController();
-        System.out.println(_player);
-        pdc.passingSelectedPlayer(_player);
-        App.setRoot("playerData");
+        if(_player == null){
+            SearchTeamController.alert("You need to select a player from the list to check it out!");
+        }else{
+            PlayerDataController pdc = new PlayerDataController();
+            System.out.println(_player);
+            pdc.passingSelectedPlayer(_player);
+            App.setRoot("playerData");
+        }
+
     }
 
     @FXML

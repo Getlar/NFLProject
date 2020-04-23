@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -7,29 +8,25 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="788.0" prefWidth="1533.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ttbdlk.SearchPlayerController">
+<AnchorPane prefHeight="1080.0" prefWidth="1920.0" styleClass="teamSearch" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ttbdlk.SearchPlayerController">
    <children>
-      <Label layoutX="44.0" layoutY="129.0" prefHeight="27.0" prefWidth="134.0" text="Sort by position:">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <ComboBox fx:id="positionComboBox" layoutX="193.0" layoutY="130.0" onAction="#handleSelectionChangedPositionComboBox" prefWidth="150.0" />
-      <Button layoutX="367.0" layoutY="581.0" mnemonicParsing="false" onAction="#handleButtonBackPushed" text="Back" />
-      <Button layoutX="1007.0" layoutY="528.0" mnemonicParsing="false" onAction="#handleButtonViewPushed" prefHeight="31.0" prefWidth="116.0" text="View" />
-      <ListView fx:id="PlayerListView" layoutX="367.0" layoutY="130.0" onEditStart="#handleSelectionChangedPlayerListView" prefHeight="431.0" prefWidth="640.0" />
-      <Label layoutX="24.0" layoutY="24.0" text="Players:">
-         <font>
-            <Font size="64.0" />
-         </font>
-      </Label>
-      <Button layoutX="1007.0" layoutY="55.0" mnemonicParsing="false" onAction="#handleButtonSearchPushed" prefHeight="31.0" prefWidth="116.0" text="Search" />
-      <TextField fx:id="searchTeamTextField" layoutX="547.0" layoutY="55.0" onAction="#onEnter" prefHeight="31.0" prefWidth="460.0" />
-      <ComboBox fx:id="collegeComboBox" layoutX="193.0" layoutY="173.0" onAction="#handleSelectionChangedCollegeComboBox" prefWidth="150.0" />
-      <Label layoutX="44.0" layoutY="172.0" prefHeight="27.0" prefWidth="134.0" text="Sort by college:">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
+      <ComboBox fx:id="positionComboBox" layoutX="382.0" layoutY="199.0" onAction="#handleSelectionChangedPositionComboBox" prefWidth="150.0" />
+      <Button id="mainMenuDreamTeam" layoutX="871.0" layoutY="927.0" mnemonicParsing="false" onAction="#handleButtonBackPushed" text="Main Menu" />
+      <Button layoutX="1315.0" layoutY="823.0" mnemonicParsing="false" onAction="#handleButtonViewPushed" prefHeight="31.0" prefWidth="116.0" styleClass="teamSearchButtons" text="View" />
+      <ListView fx:id="PlayerListView" layoutX="640.0" layoutY="199.0" onEditStart="#handleSelectionChangedPlayerListView" prefHeight="679.0" prefWidth="640.0" />
+      <Button layoutX="1305.0" layoutY="84.0" mnemonicParsing="false" onAction="#handleButtonSearchPushed" prefHeight="55.0" prefWidth="126.0" styleClass="teamSearchButtons" text="Search" />
+      <TextField fx:id="searchTeamTextField" layoutX="640.0" layoutY="91.0" onAction="#onEnter" prefHeight="41.0" prefWidth="640.0" />
+      <ComboBox fx:id="collegeComboBox" layoutX="382.0" layoutY="264.0" onAction="#handleSelectionChangedCollegeComboBox" prefHeight="25.0" prefWidth="150.0" />
+      <Text id="Teams" layoutX="77.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="labels" text="Players:" wrappingWidth="314.033203125" />
+      <ImageView fitHeight="700.0" fitWidth="537.0" layoutX="1335.0" layoutY="180.0">
+         <image>
+            <Image url="@kepek/apuci3.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="669.0" fitWidth="480.0" layoutX="49.0" layoutY="342.0">
+         <image>
+            <Image url="@kepek/ocskos.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
