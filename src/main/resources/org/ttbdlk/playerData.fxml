@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -7,88 +9,116 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="608.0" prefWidth="1501.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ttbdlk.PlayerDataController">
+<AnchorPane id="playerdatahatter" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ttbdlk.PlayerDataController">
    <children>
-      <Text fx:id="dateOfBirthText" layoutX="606.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="264.13671875">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Text>
-      <Text fx:id="positionText" layoutX="606.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="264.13671875">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Text>
-      <Text fx:id="collegeText" layoutX="606.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="264.13671875">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Text>
-      <Text fx:id="nameText" layoutX="618.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="264.13671875">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Text>
-      <Button layoutX="164.0" layoutY="301.0" mnemonicParsing="false" onAction="#handleButtonBackPushed" text="Back" />
-      <Label layoutX="268.0" layoutY="198.0" prefHeight="35.0" prefWidth="155.0" text="Date ofbirth:">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="268.0" layoutY="157.0" prefHeight="35.0" prefWidth="141.0" text="Position:">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="268.0" layoutY="115.0" prefHeight="35.0" prefWidth="93.0" text="College:">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="268.0" layoutY="66.0" prefHeight="35.0" prefWidth="93.0" text="Name:">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="268.0" layoutY="32.0" prefHeight="35.0" prefWidth="93.0" text="Pick:">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="268.0" layoutY="233.0" prefHeight="35.0" prefWidth="155.0" text="Weight:">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="268.0" layoutY="268.0" prefHeight="35.0" prefWidth="155.0" text="Height:">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="268.0" layoutY="303.0" prefHeight="35.0" prefWidth="155.0" text="Draft Team:">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Text fx:id="weightText" layoutX="599.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="264.13671875">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Text>
-      <Text fx:id="heightText" layoutX="606.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="264.13671875">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Text>
-      <Text fx:id="draftTeamText" layoutX="606.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="264.13671875">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Text>
-      <Text fx:id="pickText" layoutX="606.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="264.13671875">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Text>
+      <GridPane fx:id="playerDataGrid" alignment="CENTER_RIGHT" layoutX="660.0" layoutY="90.0" prefHeight="800.0" prefWidth="600.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Text fx:id="nameText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="szoveg" textAlignment="RIGHT" wrappingWidth="264.13671875" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="collegeText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="szoveg" textAlignment="RIGHT" wrappingWidth="264.13671875" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="positionText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="szoveg" textAlignment="RIGHT" wrappingWidth="264.13671875" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="dateOfBirthText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="szoveg" textAlignment="RIGHT" wrappingWidth="264.13671875" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="weightText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="szoveg" textAlignment="RIGHT" wrappingWidth="264.13671875" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="heightText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="szoveg" textAlignment="RIGHT" wrappingWidth="264.13671875" GridPane.columnIndex="1" GridPane.rowIndex="6">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="draftTeamText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="szoveg" textAlignment="RIGHT" wrappingWidth="264.13671875" GridPane.columnIndex="1" GridPane.rowIndex="7">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="pick" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="szoveg1" wrappingWidth="264.13671875">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="name" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="szoveg1" wrappingWidth="264.13671875" GridPane.rowIndex="1">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="college" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="szoveg1" wrappingWidth="264.13671875" GridPane.rowIndex="2">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="position" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="szoveg1" wrappingWidth="264.13671875" GridPane.rowIndex="3">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="dateofbirth" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="szoveg1" wrappingWidth="264.13671875" GridPane.rowIndex="4">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="weight" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="szoveg1" wrappingWidth="264.13671875" GridPane.rowIndex="5">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="height" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="szoveg1" wrappingWidth="264.13671875" GridPane.rowIndex="6">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="draftteam" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="szoveg1" wrappingWidth="264.13671875" GridPane.rowIndex="7">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="pickText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="szoveg" textAlignment="RIGHT" wrappingWidth="264.13671875" GridPane.columnIndex="1">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+         </children>
+      </GridPane>
+      <Button fx:id="mainMenuDreamTeam" layoutX="909.0" layoutY="961.0" mnemonicParsing="false" onAction="#handleButtonBackPushed" text="Back" />
+      <ImageView fitHeight="527.0" fitWidth="422.0" layoutX="99.0" layoutY="199.0">
+         <image>
+            <Image url="@kepek/nflLogo.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="342.0" fitWidth="521.0" layoutX="1322.0" layoutY="262.0">
+         <image>
+            <Image url="@kepek/nikelogo.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -12,6 +12,23 @@ public class PlayerDataController {
     private Text positionText;
     @FXML
     private Text pickText;
+    @FXML
+    private Text name;
+    @FXML
+    private Text pick;
+    @FXML
+    private Text college;
+    @FXML
+    private Text position;
+    @FXML
+    private Text dateofbirth;
+    @FXML
+    private Text weight;
+    @FXML
+    private Text height;
+    @FXML
+    private Text draftteam;
+
 
 
     @FXML
@@ -40,6 +57,15 @@ public class PlayerDataController {
     }
     public void initialize(){
         System.out.println(player.getName());
+        pick.setText("Pick:");
+        name.setText("Name:");
+        college.setText("College:");
+        position.setText("Position");
+        dateofbirth.setText("Date of birth:");
+        weight.setText("Weight:");
+        height.setText("Height:");
+        draftteam.setText("Draft team:");
+
        pickText.setText(Integer.toString(player.getPick()));
        nameText.setText(player.getName());
        collegeText.setText(player.getCollege());

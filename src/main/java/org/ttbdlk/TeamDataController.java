@@ -22,7 +22,7 @@ public class TeamDataController {
     private Text headcoachText;
 
     @FXML
-    private Text ownerText;
+    private Text OwnerText;
 
     //@FXML
     //private TextField nameText;
@@ -58,7 +58,7 @@ public class TeamDataController {
         nameText.setText(team.getName());
         divisionText.setText(team.getDivision());
         headcoachText.setText(team.getHeadCoach());
-        ownerText.setText(team.getOwner());
+        OwnerText.setText(team.getOwner());
         nameColumn.setCellValueFactory(new PropertyValueFactory<Player,String>("name"));
         collegeColumn.setCellValueFactory(new PropertyValueFactory<Player,String>("college"));
         positionColumn.setCellValueFactory(new PropertyValueFactory<Player,String>("position"));
