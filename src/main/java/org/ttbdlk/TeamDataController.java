@@ -54,7 +54,7 @@ public class TeamDataController {
         team = _team;
     }
 
-    public void initialize(){
+    public void initialize() throws IOException{
         nameText.setText(team.getName());
         divisionText.setText(team.getDivision());
         headcoachText.setText(team.getHeadCoach());

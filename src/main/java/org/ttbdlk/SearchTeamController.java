@@ -25,7 +25,7 @@ public class SearchTeamController {
     String sortingValue;
 
 
-    private void fillTheTeamList(){
+    private void fillTheTeamList()  throws IOException{
         DAOImplementation dao = new DAOImplementation();
         dao.DbConnect();
         teams = dao.GetTeamsData();
@@ -40,7 +40,7 @@ public class SearchTeamController {
 
     }
 
-    public void initialize(){
+    public void initialize() throws IOException{
         fillTheTeamList();
         divisionComboBox.getItems().addAll("none","NFC North", "NFC West", "NFC East","NFC South", "AFC South", "AFC West",  "AFC East", "AFC North");
         divisionComboBox.getSelectionModel().select(0);
