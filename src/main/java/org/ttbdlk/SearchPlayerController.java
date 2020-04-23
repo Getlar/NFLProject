@@ -69,7 +69,7 @@ public class SearchPlayerController {
         return values;
     }
 
-    private void fillTheTeamList(){
+    private void fillTheTeamList() throws IOException {
         DAOImplementation dao = new DAOImplementation();
         dao.DbConnect();
         players = dao.GetPlayersData();
@@ -87,7 +87,7 @@ public class SearchPlayerController {
         }
     }
 
-    public void initialize(){
+    public void initialize() throws IOException {
         fillTheTeamList();
         ArrayList<String> collegeValues = sortingValuesForCollegeComboBox();
         collegeComboBox.getItems().add("none");
