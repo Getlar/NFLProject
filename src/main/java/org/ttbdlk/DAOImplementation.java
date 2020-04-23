@@ -1,11 +1,11 @@
 package org.ttbdlk;
-import javax.persistence.criteria.CriteriaBuilder;
-import java.security.spec.ECField;
+import javafx.scene.control.Alert;
+
+import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicReferenceArray;
 
 public class DAOImplementation implements DAO{
     private Connection connection;
@@ -13,24 +13,24 @@ public class DAOImplementation implements DAO{
     private ResultSet resultset;
 
     @Override
-    public void DbConnect() {
+    public void DbConnect() throws IOException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/nfl", "root", "");
             statement = connection.createStatement();
         }
         catch (Exception ex){
-            System.out.println("Error: "+ex);
+            App.alertApp(Alert.AlertType.ERROR,"DataBase Error!", "DataBase Error!","There was a problem with our Database. Process aborted!");
+            App.setRoot("primary");
         }
     }
 
     @Override
-    public ArrayList<Player> GetPlayersData() {
+    public ArrayList<Player> GetPlayersData() throws IOException {
         ArrayList<Player> players = new ArrayList<>();
         try {
             String query = "select * from players";
             resultset = statement.executeQuery(query);
-            System.out.println("Records from database");
 
             while (resultset.next()) {
                 players.add(new Player(
@@ -46,18 +46,18 @@ public class DAOImplementation implements DAO{
 
             }
         } catch (Exception ex) {
-            System.out.println("Error: " + ex);
+            App.alertApp(Alert.AlertType.ERROR,"DataBase Error!", "DataBase Error!","There was a problem with our Database. Process aborted!");
+            App.setRoot("primary");
         }
         return players;
     }
 
     @Override
-    public ArrayList<Team> GetTeamsData() {
+    public ArrayList<Team> GetTeamsData() throws IOException {
         ArrayList<Team> teams = new ArrayList<>();
         try {
             String query = "select * from teams";
             resultset = statement.executeQuery(query);
-            System.out.println("Records from database");
             while (resultset.next()) {
                 teams.add(new Team(
                         resultset.getString("name"),
@@ -69,17 +69,18 @@ public class DAOImplementation implements DAO{
                 String name = resultset.getString("name");
                 String division = resultset.getString("division");
                 String owner = resultset.getString("owner");
-                System.out.println("name: " + name + "  " + "division: " + division + " " + "owner: " + owner);
 
             }
         } catch (Exception ex) {
-            System.out.println("Error: " + ex);
+            App.alertApp(Alert.AlertType.ERROR,"DataBase Error!", "DataBase Error!","There was a problem with our Database. Process aborted!");
+            App.setRoot("primary");
+            App.setRoot("primary");
         }
         return teams;
     }
 
     @Override
-    public void pushDataToTeams(Team team) {
+    public void pushDataToTeams(Team team) throws IOException {
         String name = team.getName();
         String division = team.getDivision();
         String owner = team.getOwner();
@@ -87,14 +88,14 @@ public class DAOImplementation implements DAO{
         try{
             String query = "insert into teams (name, division, HeadCoach, owner) values('"+name+"', '"+division+"', '"+headCoach+"', '"+owner+"');";
             statement.execute(query);
-            System.out.println("kesz");
         } catch (Exception ex){
-            System.out.println("Error: "+ex);
+            App.alertApp(Alert.AlertType.ERROR,"DataBase Error!", "DataBase Error!","There was a problem with our Database. Process aborted!");
+            App.setRoot("primary");
         }
     }
 
     @Override
-    public void pushDataToPlayers(Player player) {
+    public void pushDataToPlayers(Player player) throws IOException {
         int pick=player.getPick();
         String name=player.getName();
         String college= player.getCollege();
@@ -108,43 +109,47 @@ public class DAOImplementation implements DAO{
                     +position+"', '"+dateOfBirth+"', '"+weight+"', '"+height+"', '"+draftTeam+"');";
             statement.execute(query);
         }catch (Exception ex){
-            System.out.println("Error: "+ex);
+            App.alertApp(Alert.AlertType.ERROR,"DataBase Error!", "DataBase Error!","There was a problem with our Database. Process aborted!");
+            App.setRoot("primary");
         }
     }
 
-    public void updateDataInDreamTeams(Team newDreamTeam, Team oldDreamTeam) {
+    public void updateDataInDreamTeams(Team newDreamTeam, Team oldDreamTeam) throws IOException {
         try{
             String query = "UPDATE dreamteams SET Name = '"+newDreamTeam.getName()+"', Division = '"+newDreamTeam.getDivision()+
                     "', HeadCoach = '"+newDreamTeam.getHeadCoach()+"', Owner = '"+newDreamTeam.getOwner()+"' WHERE Name = '"+
                     oldDreamTeam.getName()+"';";
             statement.execute(query);
         } catch (Exception ex){
-            System.out.println("Error: "+ex);
+            App.alertApp(Alert.AlertType.ERROR,"DataBase Error!", "DataBase Error!",ex.toString());
+            App.setRoot("primary");
         }
     }
 
-    public void deleteDreamTeam(String dreamTeamName) {
+    public void deleteDreamTeam(String dreamTeamName) throws IOException {
         try{
             String query = "DELETE FROM dreamteams WHERE name = '"+dreamTeamName+"';";
             statement.execute(query);
         }catch (Exception ex){
-            System.out.println("Error: "+ex);
+            App.alertApp(Alert.AlertType.ERROR,"DataBase Error!", "DataBase Error!",ex.toString());
+            App.setRoot("primary");
         }
     }
 
     @Override
-    public void pushDataToDreamTeams(Team newDreamTeam) {
+    public void pushDataToDreamTeams(Team newDreamTeam) throws IOException {
         try {
             String query = "INSERT INTO dreamteams (Name, Division, HeadCoach, Owner) VALUES('" + newDreamTeam.getName() + "', '" + newDreamTeam.getDivision() + "', " +
                     "'" + newDreamTeam.getHeadCoach() + "', '" + newDreamTeam.getOwner() + "');";
             statement.execute(query);
         } catch (Exception ex) {
-            System.out.println("Error: " + ex);
+            App.alertApp(Alert.AlertType.ERROR,"DataBase Error!", "DataBase Error!",ex.toString());
+            App.setRoot("primary");
         }
     }
 
     @Override
-    public void pushPlayerToDreamTeam(Team dreamTeam, Player player){
+    public void pushPlayerToDreamTeam(Team dreamTeam, Player player) throws IOException {
         try{
             String query="SELECT LastPlayer FROM dreamteams WHERE Name = '"+dreamTeam.getName()+"'";
             String modifyLastPlayer;
@@ -166,12 +171,13 @@ public class DAOImplementation implements DAO{
             statement.execute(query);
             statement.execute(modifyLastPlayer);
         }catch (Exception ex){
-            System.out.println("Error: "+ex);
+            App.alertApp(Alert.AlertType.ERROR,"DataBase Error!", "DataBase Error!","There was a problem with our Database. Process aborted!");
+            App.setRoot("primary");
         }
     }
 
     @Override
-    public int playersInTheDreamTeam(Team dreamTeam){
+    public int playersInTheDreamTeam(Team dreamTeam) throws IOException {
         int playersSum=0;
         try{
             String query="SELECT LastPlayer FROM dreamteams WHERE Name = '"+dreamTeam.getName()+"';";
@@ -180,13 +186,14 @@ public class DAOImplementation implements DAO{
                 playersSum=resultset.getInt(1);
             }
         }catch (Exception ex){
-            System.out.println("Error: "+ex);
+            App.alertApp(Alert.AlertType.ERROR,"DataBase Error!", "DataBase Error!","There was a problem with our Database. Process aborted!");
+            App.setRoot("primary");
         }
         return playersSum;
     }
 
     @Override
-    public ArrayList<Team> getDreamTeams(){
+    public ArrayList<Team> getDreamTeams() throws IOException {
         ArrayList<Team> dreamTeams=new ArrayList<>();
         String query="SELECT Name, Division, HeadCoach, Owner FROM dreamteams";
         try {
@@ -199,13 +206,14 @@ public class DAOImplementation implements DAO{
                 ));
             }
         } catch (Exception ex) {
-            System.out.println("Error: " +ex);
+            App.alertApp(Alert.AlertType.ERROR,"DataBase Error!", "DataBase Error!","There was a problem with our Database. Process aborted!");
+            App.setRoot("primary");
         }
         return dreamTeams;
     }
 
     @Override
-    public ArrayList<Player> getPlayersFromDreamTeam(Team dreamTeam){
+    public ArrayList<Player> getPlayersFromDreamTeam(Team dreamTeam) throws IOException {
         ArrayList<Player> playersFromDreamTeam=new ArrayList<>();
         String query;
         int playersInTheDreamTeam=playersInTheDreamTeam(dreamTeam);
@@ -219,7 +227,8 @@ public class DAOImplementation implements DAO{
                         actualPlayersId=resultset.getInt(1);
                     }
                 } catch(Exception ex){
-                    System.out.println("Error: "+ex);
+                    App.alertApp(Alert.AlertType.ERROR,"DataBase Error!", "DataBase Error!","There was a problem with our Database. Process aborted!");
+                    App.setRoot("primary");
                 }
                 query = "SELECT * FROM players WHERE pick = "+actualPlayersId+";";
                 try {
@@ -230,7 +239,8 @@ public class DAOImplementation implements DAO{
                                 resultset.getInt(7), resultset.getString(8)));
                     }
                 } catch (Exception ex) {
-                    System.out.println("Error: " + ex);
+                    App.alertApp(Alert.AlertType.ERROR,"DataBase Error!", "DataBase Error!","There was a problem with our Database. Process aborted!");
+                    App.setRoot("primary");
                 }
             }
         }
@@ -241,7 +251,7 @@ public class DAOImplementation implements DAO{
     }
 
     @Override
-    public void exchangePlayers(Team dreamTeam, Player in, Player out){
+    public void exchangePlayers(Team dreamTeam, Player in, Player out) throws IOException {
         int lastPlayer=playersInTheDreamTeam(dreamTeam);
         String query;
         int result=0;
@@ -257,12 +267,14 @@ public class DAOImplementation implements DAO{
                     try{
                         statement.executeQuery(query);
                     }catch (Exception ex){
-                        System.out.println("Error: "+ex);
+                        App.alertApp(Alert.AlertType.ERROR,"DataBase Error!", "DataBase Error!","There was a problem with our Database. Process aborted!");
+                        App.setRoot("primary");
                     }
                     break;
                 }
             } catch (Exception ex){
-                System.out.println("Error: "+ex);
+                App.alertApp(Alert.AlertType.ERROR,"DataBase Error!", "DataBase Error!","There was a problem with our Database. Process aborted!");
+                App.setRoot("primary");
             }
         }
     }
