@@ -1,11 +1,9 @@
 package org.ttbdlk;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 
@@ -24,10 +22,7 @@ public class LoadingScreenController {
     public ProgressBar progressBar;
 
     public void initialize(){
-
-        System.out.println(x);
         randomText.setText("");
-
     }
 
     class bg_Thread implements Runnable{
@@ -50,7 +45,7 @@ public class LoadingScreenController {
         }
     }
     @FXML
-    void startProgressBar(ActionEvent event) throws InterruptedException {
+    void startProgressBar() {
         startButton.setVisible(false);
         progressBar.setProgress(0);
         x = (int)(Math.random()*10);
