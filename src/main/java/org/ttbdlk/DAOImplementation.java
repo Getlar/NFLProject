@@ -135,8 +135,8 @@ public class DAOImplementation implements DAO{
     @Override
     public void pushDataToDreamTeams(Team newDreamTeam) {
         try {
-            String query = "INSERT INTO dreamteams (Name, Division, HeadCoach, Owner) VALUES('" + newDreamTeam.getName() + "', '" + newDreamTeam.getHeadCoach() + "', " +
-                    "'" + newDreamTeam.getDivision() + "', '" + newDreamTeam.getOwner() + "');";
+            String query = "INSERT INTO dreamteams (Name, Division, HeadCoach, Owner) VALUES('" + newDreamTeam.getName() + "', '" + newDreamTeam.getDivision() + "', " +
+                    "'" + newDreamTeam.getHeadCoach() + "', '" + newDreamTeam.getOwner() + "');";
             statement.execute(query);
         } catch (Exception ex) {
             System.out.println("Error: " + ex);
