@@ -283,13 +283,11 @@ public class DAOImplementation implements DAO{
         try {
           String query = "select * from "+tableName;
           resultset = statement.executeQuery(query);
-            System.out.println("Records from database");
             if(tableName.compareToIgnoreCase("teams")==0) {
                 while (resultset.next()) {
                     String name = resultset.getString("name");
                     String division = resultset.getString("division");
                     String owner = resultset.getString("owner");
-                    System.out.println("name: " + name + "  " + "division: " + division + " " + "owner: " + owner);
                 }
             }
             else if(tableName.compareToIgnoreCase("players")==0){
@@ -297,7 +295,6 @@ public class DAOImplementation implements DAO{
                     String pick = resultset.getString("Pick");
                     String name = resultset.getString("Name");
                     String college = resultset.getString("College");
-                    System.out.println("name: " + name + "  " + "pick: " + pick + " " + "college: " + college);
                 }
             }
         }catch (Exception ex){

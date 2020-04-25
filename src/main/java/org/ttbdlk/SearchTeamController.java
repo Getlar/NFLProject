@@ -6,13 +6,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
 
 
-public class SearchTeamController {
+public class SearchTeamController extends DAOImplementation{
 
     @FXML
     private TextField searchTeamTextField;
@@ -25,9 +24,7 @@ public class SearchTeamController {
     String sortingValue;
 
     private void fillTheTeamList()  throws IOException{
-        DAOImplementation dao = new DAOImplementation();
-        dao.DbConnect();
-        teams = dao.GetTeamsData();
+        teams = GetTeamsData();
         if(teams == null){
             App.alertApp(Alert.AlertType.WARNING, "Database error!", "", "Something went wrong with the database!");
         }else{
@@ -40,6 +37,7 @@ public class SearchTeamController {
     }
 
     public void initialize() throws IOException{
+        DbConnect();
         fillTheTeamList();
         divisionComboBox.getItems().addAll("none","NFC North", "NFC West", "NFC East","NFC South", "AFC South", "AFC West",  "AFC East", "AFC North");
         divisionComboBox.getSelectionModel().select(0);
@@ -54,7 +52,6 @@ public class SearchTeamController {
     @FXML
     void handleButtonSearchPushed(ActionEvent event) throws IOException {
         String criteria = searchTeamTextField.getText();
-        System.out.println(criteria);
         if(criteria.equals("") && sortingValue.equals("none")){
             App.alertApp(Alert.AlertType.WARNING, "Add searching criteria!", "", "You need to add one or more criterias to search!");
         }else if(sortingValue.equals("none")){
@@ -80,7 +77,6 @@ public class SearchTeamController {
         if(team == null){
             App.alertApp(Alert.AlertType.WARNING, "Select player!", "", "You need to select a player from the list to check it out!");
         }else{
-            System.out.println(team);
             TeamDataController tdc = new TeamDataController();
             tdc.passingSelectedTeam(team);
             App.setRoot("teamData");

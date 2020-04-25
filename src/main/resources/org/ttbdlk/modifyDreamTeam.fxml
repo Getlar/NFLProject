@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.image.*?>
-<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -97,7 +93,11 @@
             <Button fx:id="modifyTeamButton" layoutX="79.0" layoutY="601.0" mnemonicParsing="false" onAction="#handleModifyTeamButton" prefHeight="95.0" prefWidth="213.0" text="Modify Selected Team" />
             <Button fx:id="mainMenuButton" layoutY="991.0" mnemonicParsing="false" onAction="#handleMainMenuButton" prefHeight="95.0" prefWidth="213.0" text="Main Menu" />
             <Button fx:id="backButton" layoutY="896.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="95.0" prefWidth="213.0" text="Back" />
-            <ImageView fitHeight="150.0" fitWidth="149.0" layoutX="218.0" layoutY="916.0" pickOnBounds="true" preserveRatio="true" style="-fx-image: url('logo.png');" />
+            <ImageView fitHeight="150.0" fitWidth="149.0" layoutX="218.0" layoutY="916.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                       <Image url="@kepek/logo.png"/>
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </children>

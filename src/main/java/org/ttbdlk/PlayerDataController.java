@@ -3,33 +3,38 @@ package org.ttbdlk;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
-
 import java.io.IOException;
-import java.time.LocalDate;
 
-public class PlayerDataController {
+public class PlayerDataController extends DAOImplementation{
     @FXML
     private Text positionText;
+
     @FXML
     private Text pickText;
+
     @FXML
     private Text name;
+
     @FXML
     private Text pick;
+
     @FXML
     private Text college;
+
     @FXML
     private Text position;
+
     @FXML
     private Text dateofbirth;
+
     @FXML
     private Text weight;
+
     @FXML
     private Text height;
+
     @FXML
     private Text draftteam;
-
-
 
     @FXML
     private Text heightText;
@@ -57,7 +62,6 @@ public class PlayerDataController {
     }
 
     public void initialize(){
-        System.out.println(player.getName());
         pick.setText("Pick:");
         name.setText("Name:");
         college.setText("College:");

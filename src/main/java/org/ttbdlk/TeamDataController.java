@@ -2,21 +2,15 @@ package org.ttbdlk;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
-import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class TeamDataController {
+public class TeamDataController extends DAOImplementation {
 
     @FXML
     private Text headcoachText;
@@ -61,14 +55,11 @@ public class TeamDataController {
         weightColumn.setCellValueFactory(new PropertyValueFactory<Player,Integer>("weight"));
         heightColumn.setCellValueFactory(new PropertyValueFactory<Player,Integer>("height"));
         teamColumn.setCellValueFactory(new PropertyValueFactory<Player,String>("draftTeam"));
-        DAOImplementation dao = new DAOImplementation();
-        dao.DbConnect();
-        ArrayList<Player> players = dao.GetPlayersData();
+        DbConnect();
+        ArrayList<Player> players = GetPlayersData();
         for (int i = 0; i < players.size(); i++) {
             if(players.get(i).getDraftTeam().equals(team.getName())){
                 TeamTableView.getItems().add(players.get(i));
-                System.out.println(players.get(i).getDraftTeam());
-                System.out.println(team.getName());
             }
         }
     }

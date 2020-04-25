@@ -2,31 +2,32 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="dreamTeamAP" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: rgb(1, 51, 105);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ttbdlk.DreamTeamController">
-   <children>
-      <Button fx:id="createDreamTeamMenuButton" layoutX="510.0" layoutY="945.0" mnemonicParsing="false" onAction="#createDreamTeam" prefHeight="80.0" prefWidth="900.0" text="Create Dream Team">
-         <font>
-            <Font name="Gill Sans MT" size="35.0" />
-         </font>
-      </Button>
-      <Button fx:id="modifyMenuButton" layoutX="510.0" layoutY="821.0" mnemonicParsing="false" onAction="#modifyExistingTeam" prefHeight="80.0" prefWidth="900.0" text="Modify Dream Team">
-         <font>
-            <Font name="Gill Sans MT" size="35.0" />
-         </font>
-      </Button>
-      <Button fx:id="mainMenuDreamTeam" layoutX="14.0" layoutY="992.0" mnemonicParsing="false" onAction="#buttonToFomenu" prefHeight="80.0" prefWidth="296.0" style="-fx-background-radius: 50px;" text="Main Menu" textAlignment="CENTER">
-         <font>
-            <Font name="Gill Sans MT" size="55.0" />
-         </font>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" />
-         </padding>
-      </Button>
-   </children>
+<AnchorPane fx:id="dreamTeamAP" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: rgb(1, 51, 105);"
+            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.ttbdlk.DreamTeamController">
+   <Button fx:id="createDreamTeamMenuButton" layoutX="510.0" layoutY="945.0" mnemonicParsing="false"
+           onAction="#createDreamTeam" prefHeight="80.0" prefWidth="900.0" text="Create Dream Team">
+      <font>
+         <Font name="Gill Sans MT" size="35.0"/>
+      </font>
+   </Button>
+   <Button fx:id="modifyMenuButton" layoutX="510.0" layoutY="821.0" mnemonicParsing="false"
+           onAction="#modifyExistingTeam" prefHeight="80.0" prefWidth="900.0" text="Modify Dream Team">
+      <font>
+         <Font name="Gill Sans MT" size="35.0"/>
+      </font>
+   </Button>
+   <Button fx:id="mainMenuDreamTeam" layoutX="14.0" layoutY="992.0" mnemonicParsing="false" onAction="#buttonToFomenu"
+           prefHeight="80.0" prefWidth="296.0" style="-fx-background-radius: 50px;" text="Main Menu"
+           textAlignment="CENTER">
+      <font>
+         <Font name="Gill Sans MT" size="55.0"/>
+      </font>
+      <padding>
+         <Insets bottom="5.0" left="5.0" right="5.0"/>
+      </padding>
+   </Button>
 </AnchorPane>

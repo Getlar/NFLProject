@@ -16,9 +16,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CreateDreamTeamController{
+public class CreateDreamTeamController extends  DAOImplementation{
 
-    private final DAOImplementation connect = new DAOImplementation();
     private Player akt;
     private Team toBeDreamTeam;
     private boolean finalizePressed = false;
@@ -108,9 +107,9 @@ public class CreateDreamTeamController{
             playerAddingAP.setVisible(true);
             Team tmp = new Team(teamNameTextField.getText(), teamDivisionTextField.getText(), teamHeadCoachTextField.getText(), teamOwnerTextField.getText());
             toBeDreamTeam = tmp;
-            connect.pushDataToDreamTeams(tmp);
+            pushDataToDreamTeams(tmp);
             ObservableList<Player> jatekosok = FXCollections.observableArrayList();
-            ArrayList<Player> players = connect.GetPlayersData();
+            ArrayList<Player> players = GetPlayersData();
             jatekosok.addAll(players);
             playerTableView.setItems(jatekosok);
             playerTableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -146,7 +145,7 @@ public class CreateDreamTeamController{
 
     public void initialize() throws IOException {
         playerAddingAP.setVisible(false);
-        connect.DbConnect();
+        DbConnect();
     }
 
     @FXML
@@ -177,7 +176,7 @@ public class CreateDreamTeamController{
         }else{
             for (Player player :playerTableView2.getItems()
                  ) {
-                connect.pushPlayerToDreamTeam(toBeDreamTeam,player);
+                pushPlayerToDreamTeam(toBeDreamTeam,player);
             }
             playerTableView2.setItems(null);
             App.alertApp(Alert.AlertType.INFORMATION, "Congratulations!","Congratulations!", "Your dream team has been created!");

@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,12 +17,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class ModifyDreamTeamController {
+public class ModifyDreamTeamController extends DAOImplementation  {
 
     private Team chosen;
     private Player firstPlayer = null;
     private Player secondPLayer = null;
-    private final DAOImplementation connect = new DAOImplementation();
     private int changeCount = 0;
     private boolean modifyButtonChanged = false;
     private final String[] divisions = {"AFC North", "AFC East", "AFC West", "AFC South", "NFC North","NFC East", "NFC West", "NFC South"};
@@ -123,8 +123,8 @@ public class ModifyDreamTeamController {
                 }
             }
         });
-        connect.DbConnect();
-        ArrayList<Team> dreamTeams = connect.getDreamTeams();
+        DbConnect();
+        ArrayList<Team> dreamTeams = getDreamTeams();
         ObservableList<Team> dream = FXCollections.observableArrayList();
         dream.addAll(dreamTeams);
         dreamTeamTableView.setItems(dream);
@@ -143,7 +143,7 @@ public class ModifyDreamTeamController {
                 change.add(firstPlayer.getName());
                 changed.add(secondPLayer.getName());
                 changeCount++;
-                connect.exchangePlayers(chosen, firstPlayer, secondPLayer);
+                exchangePlayers(chosen, firstPlayer, secondPLayer);
                 firstPlayer = null;
                 secondPLayer = null;
             } else {
@@ -187,7 +187,7 @@ public class ModifyDreamTeamController {
             alert.setContentText(sb.toString());
             Optional <ButtonType> action = alert.showAndWait();
             if (action.get() == ButtonType.OK){
-                connect.updateDataInDreamTeams(newTeam, chosen);
+                updateDataInDreamTeams(newTeam, chosen);
                 exchangePlayerTableView1.setItems(null);
                 exchangePlayerTableView.setItems(null);
                 App.setRoot("dreamTeam");
@@ -205,9 +205,7 @@ public class ModifyDreamTeamController {
             Optional<ButtonType> action = alert.showAndWait();
             //noinspection OptionalGetWithoutIsPresent
             if (action.get() == ButtonType.OK) {
-                DAOImplementation connect = new DAOImplementation();
-                connect.DbConnect();
-                connect.deleteDreamTeam(chosen.getName());
+                deleteDreamTeam(chosen.getName());
                 dreamTeamTableView.getItems().remove(chosen);
                 chosen = null;
                 playersAP.setVisible(false);
@@ -261,12 +259,12 @@ public class ModifyDreamTeamController {
                 }
             });
             ArrayList<Player> players = new ArrayList<>();
-            players = connect.GetPlayersData();
+            players = GetPlayersData();
             ObservableList<Player> jatekosok = FXCollections.observableArrayList();
             jatekosok.addAll(players);
             exchangePlayerTableView1.setItems(jatekosok);
             ArrayList<Player> dreamPlayers = new ArrayList<>();
-            dreamPlayers = connect.getPlayersFromDreamTeam(chosen);
+            dreamPlayers = getPlayersFromDreamTeam(chosen);
             ObservableList<Player> alomJatekosok = FXCollections.observableArrayList();
             alomJatekosok.addAll(dreamPlayers);
             exchangePlayerTableView.setItems(alomJatekosok);

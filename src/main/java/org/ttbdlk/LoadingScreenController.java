@@ -7,7 +7,7 @@ import javafx.scene.control.ProgressBar;
 
 import java.io.IOException;
 
-public class LoadingScreenController {
+public class LoadingScreenController extends DAOImplementation{
     @FXML
     public Button startButton;
 
@@ -21,7 +21,7 @@ public class LoadingScreenController {
     @FXML
     public ProgressBar progressBar;
 
-    public void initialize(){
+    public void initialize() throws IOException {
         randomText.setText("");
     }
 
