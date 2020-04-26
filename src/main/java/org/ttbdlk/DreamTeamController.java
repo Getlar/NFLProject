@@ -4,19 +4,20 @@ import javafx.fxml.FXML;
 
 import java.io.IOException;
 
-public class DreamTeamController {
+public class DreamTeamController extends DAOImplementation {
+
     @FXML
-    void createDreamTeam() throws IOException {
+    private void createDreamTeam() throws IOException {
         App.setRoot("createDreamTeam");
     }
 
     @FXML
-    void modifyExistingTeam() throws IOException {
+    private void modifyExistingTeam() throws IOException {
         App.setRoot("modifyDreamTeam");
     }
 
     @FXML
-    void buttonToFomenu() throws IOException {
+    private void buttonToFomenu() throws IOException {
         App.setRoot("primary");
     }
 }

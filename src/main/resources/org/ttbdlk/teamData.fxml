@@ -1,65 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ttbdlk.TeamDataController">
+<AnchorPane id="teamdatahatter" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ttbdlk.TeamDataController">
    <children>
-      <Label layoutX="258.0" layoutY="56.0" prefHeight="35.0" prefWidth="93.0" text="Name:">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="258.0" layoutY="105.0" prefHeight="35.0" prefWidth="93.0" text="Division:">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="258.0" layoutY="147.0" prefHeight="35.0" prefWidth="141.0" text="Headcoach:">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="258.0" layoutY="188.0" prefHeight="35.0" prefWidth="93.0" text="Owner:">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Button layoutX="154.0" layoutY="291.0" mnemonicParsing="false" onAction="#handleButtonBackPushed" text="Back" />
-      <Text fx:id="nameText" layoutX="912.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="264.13671875">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Text>
-      <Text fx:id="divisionText" layoutX="912.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="264.13671875">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Text>
-      <Text fx:id="headcoachText" layoutX="912.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="264.13671875">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Text>
-      <Text fx:id="ownerText" layoutX="912.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="264.13671875">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Text>
-      <TableView fx:id="TeamTableView" layoutX="454.0" layoutY="382.0" prefHeight="250.0" prefWidth="528.0">
+      <Button id="mainMenuDreamTeam" layoutX="187.0" layoutY="980.0" mnemonicParsing="false" onAction="#handleButtonBackPushed" text="Back" />
+      <TableView fx:id="TeamTableView" layoutX="486.0" layoutY="688.0" prefHeight="378.0" prefWidth="948.0" styleClass="listview">
         <columns>
-          <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
-          <TableColumn fx:id="collegeColumn" prefWidth="75.0" text="College" />
-            <TableColumn fx:id="positionColumn" prefWidth="75.0" text="Pos" />
-            <TableColumn fx:id="dobCollumn" prefWidth="75.0" text="DOB" />
-            <TableColumn fx:id="weightColumn" prefWidth="75.0" text="W" />
-            <TableColumn fx:id="heightColumn" prefWidth="75.0" text="H" />
-            <TableColumn fx:id="teamColumn" prefWidth="75.0" text="Team" />
+          <TableColumn fx:id="nameColumn" prefWidth="119.0" text="Name" />
+          <TableColumn fx:id="collegeColumn" prefWidth="119.0" text="College" />
+            <TableColumn fx:id="positionColumn" prefWidth="67.0" text="Pos" />
+            <TableColumn fx:id="dobCollumn" prefWidth="126.0" text="DOB" />
+            <TableColumn fx:id="weightColumn" prefWidth="108.0" text="W" />
+            <TableColumn fx:id="heightColumn" prefWidth="163.0" text="H" />
+            <TableColumn fx:id="teamColumn" prefWidth="207.0" text="Team" />
         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
+      <GridPane alignment="CENTER" layoutX="435.0" layoutY="309.0" prefHeight="289.0" prefWidth="1048.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="601.0" minWidth="10.0" prefWidth="493.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="601.0" minWidth="10.0" prefWidth="130.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="597.0" minWidth="10.0" prefWidth="436.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <ImageView fitHeight="95.0" fitWidth="92.0">
+               <image>
+                  <Image url="@kepek/headcoach1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="103.0" fitWidth="46.0" GridPane.columnIndex="2">
+               <image>
+                  <Image url="@kepek/owner.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="headcoachText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="szoveg" textAlignment="CENTER" wrappingWidth="477.33331298828125" GridPane.rowIndex="1" />
+            <Text fx:id="OwnerText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="szoveg" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="416.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+      <ImageView fitHeight="585.0" fitWidth="549.0" layoutX="672.0" layoutY="103.0">
+         <image>
+            <Image url="@kepek/teamdataapu.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="nameText" layoutX="667.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="szoveg" text="Dikaz" textAlignment="CENTER" wrappingWidth="561.3333740234375" />
+      <Text fx:id="divisionText" layoutX="913.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" />
    </children>
 </AnchorPane>

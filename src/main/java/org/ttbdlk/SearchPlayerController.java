@@ -1,190 +1,161 @@
 package org.ttbdlk;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class SearchPlayerController {
+public class SearchPlayerController extends DAOImplementation{
     @FXML
     private ListView<Player> PlayerListView;
-
     @FXML
     private ComboBox<String> collegeComboBox;
-
     @FXML
     private ComboBox<String> positionComboBox;
-
     @FXML
     private TextField searchTeamTextField;
 
-    ArrayList<Player> players;
-    String positionSortingValue;
-    String collegeSortingValue;
+    private ArrayList<Player> players;
+    private String positionSortingValue;
+    private String collegeSortingValue;
 
 
     private ArrayList<String> sortingValuesForPositionComboBox(){
         ArrayList<String> values = new ArrayList<>();
-        for (int i = 0; i < players.size(); i++) {
+        for (Player player : players) {
             boolean bennevan = false;
-            for (int j = 0; j < values.size(); j++) {
-                if(players.get(i).getPosition().equals(values.get(j))){
+            for (String value : values) {
+                if (player.getPosition().equals(value)) {
                     bennevan = true;
                     break;
                 }
             }
-            if(bennevan == false){
-                values.add(players.get(i).getPosition());
+            if (!bennevan) {
+                values.add(player.getPosition());
             }
         }
-        for (int i = 0; i < values.size(); i++) {
-            System.out.println(values.get(i));
-        }
-        System.out.println(values.size());
         return values;
     }
+
     private ArrayList<String> sortingValuesForCollegeComboBox(){
         ArrayList<String> values = new ArrayList<>();
-        for (int i = 0; i < players.size(); i++) {
+        for (Player player : players) {
             boolean bennevan = false;
-            for (int j = 0; j < values.size(); j++) {
-                if(players.get(i).getCollege().equals(values.get(j))){
+            for (String value : values) {
+                if (player.getCollege().equals(value)) {
                     bennevan = true;
                     break;
                 }
             }
-            if(bennevan == false){
-                values.add(players.get(i).getCollege());
+            if (!bennevan) {
+                values.add(player.getCollege());
             }
         }
-        for (int i = 0; i < values.size(); i++) {
-            System.out.println(values.get(i));
-        }
-        System.out.println(values.size());
         return values;
     }
 
     private void fillTheTeamList()  throws IOException{
-        DAOImplementation dao = new DAOImplementation();
-        dao.DbConnect();
-        players = dao.GetPlayersData();
+        players = GetPlayersData();
         if(players == null){
-            SearchTeamController.alert("Something went wrong with the database!");
+            App.alertApp(Alert.AlertType.WARNING, "Database error!", "", "Something went wrong with the database!");
         }else{
             PlayerListView.getItems().clear();
-            for (int i = 0; i < players.size(); i++) {
-                PlayerListView.getItems().add(players.get(i));
-
+            for (Player player : players) {
+                PlayerListView.getItems().add(player);
             }
         }
-
     }
 
     public void initialize()  throws IOException{
+        DbConnect();
         fillTheTeamList();
         ArrayList<String> collegeValues = sortingValuesForCollegeComboBox();
         collegeComboBox.getItems().add("none");
-        for (int i = 0; i < collegeValues.size(); i++) {
-            collegeComboBox.getItems().add(collegeValues.get(i));
-            System.out.println(collegeValues.get(i));
+        for (String collegeValue : collegeValues) {
+            collegeComboBox.getItems().add(collegeValue);
         }
         ArrayList<String> positionValues = sortingValuesForPositionComboBox();
         positionComboBox.getItems().add("none");
-        for (int i = 0; i < positionValues.size(); i++) {
-            positionComboBox.getItems().add(positionValues.get(i));
-            System.out.println(positionValues.get(i));
+        for (String positionValue : positionValues) {
+            positionComboBox.getItems().add(positionValue);
         }
         positionComboBox.getSelectionModel().select(0);
         collegeComboBox.getSelectionModel().select(0);
         collegeSortingValue = "none";
         positionSortingValue = "none";
     }
+
     @FXML
-    void handleSelectionChangedPositionComboBox(ActionEvent event) {
+    private void handleSelectionChangedPositionComboBox() {
         positionSortingValue = positionComboBox.getSelectionModel().getSelectedItem();
     }
+
     @FXML
-    void handleSelectionChangedCollegeComboBox(ActionEvent event) {
+    private void handleSelectionChangedCollegeComboBox() {
         collegeSortingValue = collegeComboBox.getSelectionModel().getSelectedItem();
     }
 
     @FXML
-    void handleButtonBackPushed(ActionEvent event) throws IOException {
+    private void handleButtonBackPushed() throws IOException {
         App.setRoot("primary");
     }
 
     @FXML
-    void handleButtonViewPushed(ActionEvent event) throws IOException {
+    private void handleButtonViewPushed() throws IOException {
         Player _player = PlayerListView.getSelectionModel().getSelectedItem();
         if(_player == null){
-            SearchTeamController.alert("You need to select a player from the list to check it out!");
+            App.alertApp(Alert.AlertType.WARNING, "Select player!", "", "You need to select a player from the list to check it out!");
         }else{
             PlayerDataController pdc = new PlayerDataController();
-            System.out.println(_player);
             pdc.passingSelectedPlayer(_player);
             App.setRoot("playerData");
         }
-
     }
 
     @FXML
-    void handleSelectionChangedPlayerListView(ActionEvent event) {
-
-    }
-
-    @FXML
-    void handleButtonSearchPushed(ActionEvent event) {
+    private void handleButtonSearchPushed() throws IOException {
         String criteria = searchTeamTextField.getText();
-        System.out.println(criteria);
         PlayerListView.getItems().clear();
         if(criteria.equals("") && positionSortingValue.equals("none") && collegeSortingValue.equals("none")){
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("You need to add or type some criteria to search!");
-            alert.show();
+            App.alertApp(Alert.AlertType.WARNING, "Add searching criteria!", "", "You need to add one or more criterias to search!");
         }else if(collegeSortingValue.equals("none") && positionSortingValue.equals("none")){
 
-            for (int i = 0; i < players.size(); i++) {
-                if (players.get(i).getName().toLowerCase().contains(criteria.toLowerCase())) {
-                    PlayerListView.getItems().add(players.get(i));
+            for (Player player : players) {
+                if (player.getName().toLowerCase().contains(criteria.toLowerCase())) {
+                    PlayerListView.getItems().add(player);
                 }
             }
         }else if(!collegeSortingValue.equals("none") && positionSortingValue.equals("none")){
-            for (int i = 0; i < players.size(); i++) {
-                if (players.get(i).getName().toLowerCase().contains(criteria.toLowerCase())
-                        && collegeSortingValue.equals(players.get(i).getCollege()))
-                {
-                    PlayerListView.getItems().add(players.get(i));
+            for (Player player : players) {
+                if (player.getName().toLowerCase().contains(criteria.toLowerCase())
+                        && collegeSortingValue.equals(player.getCollege())) {
+                    PlayerListView.getItems().add(player);
                 }
             }
-        }else if(collegeSortingValue.equals("none") && !positionSortingValue.equals("none")){
-            for (int i = 0; i < players.size(); i++) {
-                if (players.get(i).getName().toLowerCase().contains(criteria.toLowerCase())
-                        && positionSortingValue.equals(players.get(i).getPosition()))
-                {
-                    PlayerListView.getItems().add(players.get(i));
+        }else if(collegeSortingValue.equals("none")){
+            for (Player player : players) {
+                if (player.getName().toLowerCase().contains(criteria.toLowerCase())
+                        && positionSortingValue.equals(player.getPosition())) {
+                    PlayerListView.getItems().add(player);
                 }
             }
         }else
             {
             PlayerListView.getItems().clear();
-            for (int i = 0; i < players.size(); i++) {
-                if (players.get(i).getName().toLowerCase().contains(criteria.toLowerCase())
-                        && positionSortingValue.equals(players.get(i).getPosition())
-                        && collegeSortingValue.equals(players.get(i).getCollege()))
-                {
-                    PlayerListView.getItems().add(players.get(i));
+                for (Player player : players) {
+                    if (player.getName().toLowerCase().contains(criteria.toLowerCase())
+                            && positionSortingValue.equals(player.getPosition())
+                            && collegeSortingValue.equals(player.getCollege())) {
+                        PlayerListView.getItems().add(player);
+                    }
                 }
-            }
         }
     }
 
-
-    public void onEnter(ActionEvent event) {
-        handleButtonSearchPushed(event);
+    public void onEnter() throws IOException {
+        handleButtonSearchPushed();
     }
 }

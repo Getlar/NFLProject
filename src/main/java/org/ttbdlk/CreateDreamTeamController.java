@@ -2,7 +2,6 @@ package org.ttbdlk;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -16,9 +15,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CreateDreamTeamController{
+public class CreateDreamTeamController extends  DAOImplementation{
 
-    private final DAOImplementation connect = new DAOImplementation();
     private Player akt;
     private Team toBeDreamTeam;
     private boolean finalizePressed = false;
@@ -90,7 +88,7 @@ public class CreateDreamTeamController{
     private TableColumn<Player, String> teamColumn1;
 
     @FXML
-    void createTeamButtonPressed() throws IOException {
+    private void createTeamButtonPressed() throws IOException {
         if (createPressed){
             App.alertApp(Alert.AlertType.ERROR, "Creation Error!",null,"You have already created your team!");
         }
@@ -108,18 +106,14 @@ public class CreateDreamTeamController{
             playerAddingAP.setVisible(true);
             Team tmp = new Team(teamNameTextField.getText(), teamDivisionTextField.getText(), teamHeadCoachTextField.getText(), teamOwnerTextField.getText());
             toBeDreamTeam = tmp;
-            connect.pushDataToDreamTeams(tmp);
+            pushDataToDreamTeams(tmp);
             ObservableList<Player> jatekosok = FXCollections.observableArrayList();
-            ArrayList<Player> players = connect.GetPlayersData();
+            ArrayList<Player> players = GetPlayersData();
             jatekosok.addAll(players);
             playerTableView.setItems(jatekosok);
-            playerTableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent click) {
-                    if (click.getClickCount() == 1) {
-                        Player p = playerTableView.getSelectionModel().getSelectedItem();
-                        akt = p;
-                    }
+            playerTableView.setOnMouseClicked(click -> {
+                if (click.getClickCount() == 1) {
+                    akt = playerTableView.getSelectionModel().getSelectedItem();
                 }
             });
             createPressed = true;
@@ -127,7 +121,7 @@ public class CreateDreamTeamController{
     }
 
     @FXML
-    void buttonToBack() throws IOException {
+    private void buttonToBack() throws IOException {
         if (!finalizePressed && createPressed){
             App.alertApp(Alert.AlertType.CONFIRMATION,"Confirmation Dialog",toBeDreamTeam.getName(),"Are you sure you want to go back?\nYour dream team will be deleted!");
         }else{
@@ -136,7 +130,7 @@ public class CreateDreamTeamController{
     }
 
     @FXML
-    void buttonToFomenu() throws IOException {
+    private void buttonToFomenu() throws IOException {
         if (!finalizePressed && createPressed){
             App.alertApp(Alert.AlertType.CONFIRMATION,"Confirmation Dialog",toBeDreamTeam.getName(),"Are you sure you want to go back?\nYour dream team will be deleted!");
         }else{
@@ -146,11 +140,11 @@ public class CreateDreamTeamController{
 
     public void initialize() throws IOException {
         playerAddingAP.setVisible(false);
-        connect.DbConnect();
+        DbConnect();
     }
 
     @FXML
-    void handleAddButton() throws IOException {
+    private void handleAddButton() throws IOException {
         if (akt != null && playerTableView2.getItems().size() < 11) {
             playerTableView2.getItems().add(akt);
             playerTableView.getItems().remove(akt);
@@ -162,7 +156,7 @@ public class CreateDreamTeamController{
     }
 
     @FXML
-    void handleResetButton(ActionEvent event) throws IOException {
+    private void handleResetButton() throws IOException {
         if (playerTableView2.getItems().size()!=0) {
             playerTableView.getItems().add(playerTableView2.getItems().get(playerTableView2.getItems().size() - 1));
             playerTableView2.getItems().remove(playerTableView2.getItems().get(playerTableView2.getItems().size() - 1));
@@ -171,13 +165,13 @@ public class CreateDreamTeamController{
         }
     }
     @FXML
-    void handleFinalizeButton(ActionEvent event) throws IOException {
+    private void handleFinalizeButton() throws IOException {
         if (playerTableView2.getItems().size()!=11){
             App.alertApp(Alert.AlertType.ERROR,"Not Enough Players!","Not Enough Players!", "You must select exactly 11 players to finalize your team!");
         }else{
             for (Player player :playerTableView2.getItems()
                  ) {
-                connect.pushPlayerToDreamTeam(toBeDreamTeam,player);
+                pushPlayerToDreamTeam(toBeDreamTeam,player);
             }
             playerTableView2.setItems(null);
             App.alertApp(Alert.AlertType.INFORMATION, "Congratulations!","Congratulations!", "Your dream team has been created!");
@@ -185,21 +179,21 @@ public class CreateDreamTeamController{
             App.setRoot("dreamTeam");
         }
     }
-
     static void tableSetup(TableColumn<Player, String> nameColumn, TableColumn<Player, String> collegeColumn, TableColumn<Player, String> positionColumn, TableColumn<Player, LocalDate> dobCollumn, TableColumn<Player, Integer> weightColumn, TableColumn<Player, Integer> heightColumn, TableColumn<Player, String> teamColumn, TableColumn<Player, String> nameColumn1, TableColumn<Player, String> collegeColumn1, TableColumn<Player, String> positionColumn1, TableColumn<Player, LocalDate> dobCollumn1, TableColumn<Player, Integer> weightColumn1, TableColumn<Player, Integer> heightColumn1, TableColumn<Player, String> teamColumn1) {
-        nameColumn.setCellValueFactory(new PropertyValueFactory<Player, String>("name"));
-        collegeColumn.setCellValueFactory(new PropertyValueFactory<Player, String>("college"));
-        positionColumn.setCellValueFactory(new PropertyValueFactory<Player, String>("position"));
-        dobCollumn.setCellValueFactory(new PropertyValueFactory<Player, LocalDate>("dateOfBirth"));
-        weightColumn.setCellValueFactory(new PropertyValueFactory<Player, Integer>("weight"));
-        heightColumn.setCellValueFactory(new PropertyValueFactory<Player, Integer>("height"));
-        teamColumn.setCellValueFactory(new PropertyValueFactory<Player, String>("draftTeam"));
-        nameColumn1.setCellValueFactory(new PropertyValueFactory<Player, String>("name"));
-        collegeColumn1.setCellValueFactory(new PropertyValueFactory<Player, String>("college"));
-        positionColumn1.setCellValueFactory(new PropertyValueFactory<Player, String>("position"));
-        dobCollumn1.setCellValueFactory(new PropertyValueFactory<Player, LocalDate>("dateOfBirth"));
-        weightColumn1.setCellValueFactory(new PropertyValueFactory<Player, Integer>("weight"));
-        heightColumn1.setCellValueFactory(new PropertyValueFactory<Player, Integer>("height"));
-        teamColumn1.setCellValueFactory(new PropertyValueFactory<Player, String>("draftTeam"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        collegeColumn.setCellValueFactory(new PropertyValueFactory<>("college"));
+        positionColumn.setCellValueFactory(new PropertyValueFactory<>("position"));
+        dobCollumn.setCellValueFactory(new PropertyValueFactory<>("dateOfBirth"));
+        weightColumn.setCellValueFactory(new PropertyValueFactory<>("weight"));
+        heightColumn.setCellValueFactory(new PropertyValueFactory<>("height"));
+        teamColumn.setCellValueFactory(new PropertyValueFactory<>("draftTeam"));
+        nameColumn1.setCellValueFactory(new PropertyValueFactory<>("name"));
+        collegeColumn1.setCellValueFactory(new PropertyValueFactory<>("college"));
+        positionColumn1.setCellValueFactory(new PropertyValueFactory<>("position"));
+        dobCollumn1.setCellValueFactory(new PropertyValueFactory<>("dateOfBirth"));
+        weightColumn1.setCellValueFactory(new PropertyValueFactory<>("weight"));
+        heightColumn1.setCellValueFactory(new PropertyValueFactory<>("height"));
+        teamColumn1.setCellValueFactory(new PropertyValueFactory<>("draftTeam"));
     }
+
 }

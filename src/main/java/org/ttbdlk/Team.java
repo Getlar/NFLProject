@@ -56,6 +56,6 @@ public class Team{
 
     @Override
     public String toString() {
-        return name + "" + division;
+        return name;
     }
 }

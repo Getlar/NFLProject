@@ -1,32 +1,20 @@
 package org.ttbdlk;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
-import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class TeamDataController {
+public class TeamDataController extends DAOImplementation {
 
     @FXML
     private Text headcoachText;
-
     @FXML
-    private Text ownerText;
-
-    //@FXML
-    //private TextField nameText;
-
+    private Text OwnerText;
     @FXML
     private Text divisionText;
     @FXML
@@ -48,7 +36,7 @@ public class TeamDataController {
     @FXML
     private TableColumn<Player, String> teamColumn;
 
-    public static Team team;
+    private static Team team;
 
     public void passingSelectedTeam(Team _team){
         team = _team;
@@ -58,29 +46,25 @@ public class TeamDataController {
         nameText.setText(team.getName());
         divisionText.setText(team.getDivision());
         headcoachText.setText(team.getHeadCoach());
-        ownerText.setText(team.getOwner());
-        nameColumn.setCellValueFactory(new PropertyValueFactory<Player,String>("name"));
-        collegeColumn.setCellValueFactory(new PropertyValueFactory<Player,String>("college"));
-        positionColumn.setCellValueFactory(new PropertyValueFactory<Player,String>("position"));
-        dobCollumn.setCellValueFactory(new PropertyValueFactory<Player, LocalDate>("dateOfBirth"));
-        weightColumn.setCellValueFactory(new PropertyValueFactory<Player,Integer>("weight"));
-        heightColumn.setCellValueFactory(new PropertyValueFactory<Player,Integer>("height"));
-        teamColumn.setCellValueFactory(new PropertyValueFactory<Player,String>("draftTeam"));
-        DAOImplementation dao = new DAOImplementation();
-        dao.DbConnect();
-        ArrayList<Player> players = dao.GetPlayersData();
-        for (int i = 0; i < players.size(); i++) {
-            if(players.get(i).getDraftTeam().equals(team.getName())){
-                TeamTableView.getItems().add(players.get(i));
-                System.out.println(players.get(i).getDraftTeam());
-                System.out.println(team.getName());
+        OwnerText.setText(team.getOwner());
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        collegeColumn.setCellValueFactory(new PropertyValueFactory<>("college"));
+        positionColumn.setCellValueFactory(new PropertyValueFactory<>("position"));
+        dobCollumn.setCellValueFactory(new PropertyValueFactory<>("dateOfBirth"));
+        weightColumn.setCellValueFactory(new PropertyValueFactory<>("weight"));
+        heightColumn.setCellValueFactory(new PropertyValueFactory<>("height"));
+        teamColumn.setCellValueFactory(new PropertyValueFactory<>("draftTeam"));
+        DbConnect();
+        ArrayList<Player> players = GetPlayersData();
+        for (Player player : players) {
+            if (player.getDraftTeam().equals(team.getName())) {
+                TeamTableView.getItems().add(player);
             }
         }
-
     }
+
     @FXML
-    void handleButtonBackPushed(ActionEvent event) throws IOException {
+    private void handleButtonBackPushed() throws IOException {
         App.setRoot("searchTeam");
     }
-
 }

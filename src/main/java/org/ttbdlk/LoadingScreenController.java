@@ -7,19 +7,18 @@ import javafx.scene.control.ProgressBar;
 
 import java.io.IOException;
 
-public class LoadingScreenController {
+public class LoadingScreenController extends DAOImplementation{
     @FXML
-    public Button startButton;
+    private Button startButton;
 
     @FXML
     private Label randomText;
 
-    int x;
-    String[] textek = {"Loading Database...","Initiating Players...","Waiting for David to finish Database...","Touchdown Control...","Preparing for Super Bowl..."
-            ,"Initiating Draft Sequnce...","Drafting Players...","Preparing for Season...", "Getting To Know The User...","Finishing Off The Patriots..."};
-
     @FXML
-    public ProgressBar progressBar;
+    private ProgressBar progressBar;
+
+    private final String[] textek = {"Loading Database...","Initiating Players...","Waiting for David to finish Database...","Touchdown Control...","Preparing for Super Bowl..."
+            ,"Initiating Draft Sequnce...","Drafting Players...","Preparing for Season...", "Getting To Know The User...","Finishing Off The Patriots..."};
 
     public void initialize(){
         randomText.setText("");
@@ -45,10 +44,10 @@ public class LoadingScreenController {
         }
     }
     @FXML
-    void startProgressBar() {
+    private void startProgressBar() {
         startButton.setVisible(false);
         progressBar.setProgress(0);
-        x = (int)(Math.random()*10);
+        int x = (int) (Math.random() * 10);
         randomText.setText(textek[x]);
         Thread th = new Thread(new bg_Thread());
         th.start();

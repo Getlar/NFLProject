@@ -2,22 +2,19 @@
 
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="1080.0" prefWidth="1920.0" styleClass="teamSearch" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ttbdlk.SearchPlayerController">
    <children>
-      <ComboBox fx:id="positionComboBox" layoutX="382.0" layoutY="199.0" onAction="#handleSelectionChangedPositionComboBox" prefWidth="150.0" />
+      <ComboBox fx:id="positionComboBox" layoutX="443.0" layoutY="199.0" onAction="#handleSelectionChangedPositionComboBox" prefWidth="150.0" styleClass="listview" />
       <Button id="mainMenuDreamTeam" layoutX="871.0" layoutY="927.0" mnemonicParsing="false" onAction="#handleButtonBackPushed" text="Main Menu" />
       <Button layoutX="1315.0" layoutY="823.0" mnemonicParsing="false" onAction="#handleButtonViewPushed" prefHeight="31.0" prefWidth="116.0" styleClass="teamSearchButtons" text="View" />
-      <ListView fx:id="PlayerListView" layoutX="640.0" layoutY="199.0" onEditStart="#handleSelectionChangedPlayerListView" prefHeight="679.0" prefWidth="640.0" />
+      <ListView fx:id="PlayerListView" layoutX="640.0" layoutY="199.0"  prefHeight="679.0" prefWidth="640.0" styleClass="listview" />
       <Button layoutX="1305.0" layoutY="84.0" mnemonicParsing="false" onAction="#handleButtonSearchPushed" prefHeight="55.0" prefWidth="126.0" styleClass="teamSearchButtons" text="Search" />
-      <TextField fx:id="searchTeamTextField" layoutX="640.0" layoutY="91.0" onAction="#onEnter" prefHeight="41.0" prefWidth="640.0" />
-      <ComboBox fx:id="collegeComboBox" layoutX="382.0" layoutY="264.0" onAction="#handleSelectionChangedCollegeComboBox" prefHeight="25.0" prefWidth="150.0" />
-      <Text id="Teams" layoutX="77.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="labels" text="Players:" wrappingWidth="314.033203125" />
+      <TextField fx:id="searchTeamTextField" layoutX="640.0" layoutY="91.0" onAction="#onEnter" prefHeight="41.0" prefWidth="640.0" styleClass="listview" />
+      <ComboBox fx:id="collegeComboBox" layoutX="443.0" layoutY="279.0" onAction="#handleSelectionChangedCollegeComboBox" prefWidth="150.0" styleClass="listview" />
+      <Text id="Teams" layoutX="49.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="labels" text="Players:" wrappingWidth="314.033203125" />
       <ImageView fitHeight="700.0" fitWidth="537.0" layoutX="1335.0" layoutY="180.0">
          <image>
             <Image url="@kepek/apuci3.png" />
@@ -28,5 +25,7 @@
             <Image url="@kepek/ocskos.png" />
          </image>
       </ImageView>
+      <Text layoutX="208.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="szoveg" text="Position criteria:" />
+      <Text layoutX="206.0" layoutY="307.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="szoveg" text="College criteria:" />
    </children>
 </AnchorPane>

@@ -1,8 +1,6 @@
 package org.ttbdlk;
 import javax.persistence.*;
-import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Locale;
 
 @Entity
 @Table(name="Players")
