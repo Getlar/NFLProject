@@ -17,4 +17,8 @@ public interface DAO {
     ArrayList<Team> getDreamTeams() throws IOException;
     ArrayList<Player> getPlayersFromDreamTeam(Team dreamTeam) throws IOException;
     void exchangePlayers(Team dreamTeam, Player in, Player out) throws IOException;
+    //temporary
+    void updateDataInPlayers(int pick, String name) throws IOException;
+    int height(int feet, int inch);
+    int weight(int lbs);
 }

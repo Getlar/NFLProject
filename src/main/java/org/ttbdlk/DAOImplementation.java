@@ -11,7 +11,33 @@ public class DAOImplementation implements DAO{
     private Connection connection;
     private Statement statement;
     private ResultSet resultset;
+    //temporary
+    @Override
+    public void updateDataInPlayers(int pick, String name){
+        try{
+            String query="UPDATE players SET Pick = "+pick+"WHERE Name = "+name+";";
+            statement.executeQuery(query);
 
+        }catch (Exception ex){
+            System.out.println("Error: "+ex);
+        }
+    }
+
+    @Override
+    public int height(int feet, int inch){
+        float cm;
+        cm= (float) (feet*30.48+2.54*inch);
+        return Math.round(cm);
+    }
+
+    @Override
+    public int weight(int lbs){
+        float kg;
+        kg=(float) (lbs*0.45359);
+        return Math.round(kg);
+    }
+
+    //temprorary end
     @Override
     public void DbConnect() throws IOException {
         try {
