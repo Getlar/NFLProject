@@ -2,7 +2,6 @@ package org.ttbdlk;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -26,8 +25,8 @@ public class ModifyDreamTeamController extends DAOImplementation  {
     private boolean modifyButtonChanged = false;
     private final String[] divisions = {"AFC North", "AFC East", "AFC West", "AFC South", "NFC North","NFC East", "NFC West", "NFC South"};
     private final List<String> teamDivisions = Arrays.asList(divisions);
-    private List<String> changed = new ArrayList<>();
-    private List<String> change = new ArrayList<>();
+    private final List<String> changed = new ArrayList<>();
+    private final List<String> change = new ArrayList<>();
 
     @FXML
     private TextField changeDivisionTextField;
@@ -108,19 +107,15 @@ public class ModifyDreamTeamController extends DAOImplementation  {
     private TableColumn<Team, String> teamNameColumn;
 
     @FXML
-    public void initialize() throws IOException {
+    private void initialize() throws IOException {
         playersAP.setVisible(false);
-        teamNameColumn.setCellValueFactory(new PropertyValueFactory<Team, String>("name"));
-        teamDivColumn.setCellValueFactory(new PropertyValueFactory<Team, String>("division"));
-        teamHeadCoachColumn.setCellValueFactory(new PropertyValueFactory<Team, String>("headCoach"));
-        teamOwnerColumn.setCellValueFactory(new PropertyValueFactory<Team, String>("owner"));
-        dreamTeamTableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent click) {
-                if (click.getClickCount()==1){
-                    Team t = dreamTeamTableView.getSelectionModel().getSelectedItem();
-                    chosen = t;
-                }
+        teamNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        teamDivColumn.setCellValueFactory(new PropertyValueFactory<>("division"));
+        teamHeadCoachColumn.setCellValueFactory(new PropertyValueFactory<>("headCoach"));
+        teamOwnerColumn.setCellValueFactory(new PropertyValueFactory<>("owner"));
+        dreamTeamTableView.setOnMouseClicked(click -> {
+            if (click.getClickCount()==1){
+                chosen = dreamTeamTableView.getSelectionModel().getSelectedItem();
             }
         });
         DbConnect();
@@ -131,7 +126,7 @@ public class ModifyDreamTeamController extends DAOImplementation  {
     }
 
     @FXML
-    void handleExchangePlayerButton(ActionEvent event) throws IOException {
+    private void handleExchangePlayerButton() throws IOException {
         if (firstPlayer == null || secondPLayer == null){
             App.alertApp(Alert.AlertType.ERROR,"Selection Error!", null, "Please select one player from each team to exchange!");
         }else {
@@ -153,7 +148,7 @@ public class ModifyDreamTeamController extends DAOImplementation  {
     }
 
     @FXML
-    void handleFinalizeTeamButton(ActionEvent event) throws IOException {
+    private void handleFinalizeTeamButton() throws IOException {
         String teamName = changeTeamNameTextField.getText();
         String teamOwner = changeOwnerTextField.getText();
         String teamCoach = changeHeadCoachTextField.getText();
@@ -178,7 +173,7 @@ public class ModifyDreamTeamController extends DAOImplementation  {
             sb.append("Are you sure you want to apply these changes?\n").append("Team Name: ").append(chosen.getName()).append(" -> ").append(teamName).append("\n").append("Team Division: ").append(chosen.getDivision()).append(" -> ").append(teamDivision).append("\n").append("Team Head Coach: ").append(chosen.getHeadCoach()).append(" -> ").append(teamCoach).append("\n").append("Team Owner: ").append(chosen.getOwner()).append(" -> ").append(teamOwner);
             if (change.size()!=0){
                 for (int i = 0; i < change.size(); i++){
-                    sb.append("\n" + changed.get(i)+" -> " + change.get(i));
+                    sb.append("\n").append(changed.get(i)).append(" -> ").append(change.get(i));
                 }
             }
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -186,17 +181,19 @@ public class ModifyDreamTeamController extends DAOImplementation  {
             alert.setHeaderText(null);
             alert.setContentText(sb.toString());
             Optional <ButtonType> action = alert.showAndWait();
-            if (action.get() == ButtonType.OK){
-                updateDataInDreamTeams(newTeam, chosen);
-                exchangePlayerTableView1.setItems(null);
-                exchangePlayerTableView.setItems(null);
-                App.setRoot("dreamTeam");
+            if (action.isPresent()) {
+                if (action.get() == ButtonType.OK) {
+                    updateDataInDreamTeams(newTeam, chosen);
+                    exchangePlayerTableView1.setItems(null);
+                    exchangePlayerTableView.setItems(null);
+                    App.setRoot("dreamTeam");
+                }
             }
         }
     }
 
     @FXML
-    void handleDeleteSelectedTeamButton(ActionEvent event) throws IOException {
+     private void handleDeleteSelectedTeamButton() throws IOException {
         if (chosen!=null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Deleting Dream Team");
@@ -217,7 +214,7 @@ public class ModifyDreamTeamController extends DAOImplementation  {
     }
 
     @FXML
-    void handleModifyTeamButton(ActionEvent event) throws IOException {
+     private void handleModifyTeamButton() throws IOException {
         if (modifyButtonChanged) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Deleting Modifications!");
@@ -240,30 +237,22 @@ public class ModifyDreamTeamController extends DAOImplementation  {
         if (chosen != null) {
             playersAP.setVisible(true);
             CreateDreamTeamController.tableSetup(nameColumn, collegeColumn, positionColumn, dobColumn, weightColumn, heightColumn, teamColumn, nameColumn1, collegeColumn1, positionColumn1, dobColumn1, weightColumn1, heightColumn1, teamColumn1);
-            exchangePlayerTableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent click) {
-                    if (click.getClickCount() == 1) {
-                        Player p = exchangePlayerTableView.getSelectionModel().getSelectedItem();
-                        firstPlayer = p;
-                    }
+            exchangePlayerTableView.setOnMouseClicked(click -> {
+                if (click.getClickCount() == 1) {
+                    firstPlayer = exchangePlayerTableView.getSelectionModel().getSelectedItem();
                 }
             });
-            exchangePlayerTableView1.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent click) {
-                    if (click.getClickCount() == 1) {
-                        Player p = exchangePlayerTableView1.getSelectionModel().getSelectedItem();
-                        secondPLayer = p;
-                    }
+            exchangePlayerTableView1.setOnMouseClicked(click -> {
+                if (click.getClickCount() == 1) {
+                    secondPLayer = exchangePlayerTableView1.getSelectionModel().getSelectedItem();
                 }
             });
-            ArrayList<Player> players = new ArrayList<>();
+            ArrayList<Player> players;
             players = GetPlayersData();
             ObservableList<Player> jatekosok = FXCollections.observableArrayList();
             jatekosok.addAll(players);
             exchangePlayerTableView1.setItems(jatekosok);
-            ArrayList<Player> dreamPlayers = new ArrayList<>();
+            ArrayList<Player> dreamPlayers;
             dreamPlayers = getPlayersFromDreamTeam(chosen);
             ObservableList<Player> alomJatekosok = FXCollections.observableArrayList();
             alomJatekosok.addAll(dreamPlayers);
@@ -279,7 +268,7 @@ public class ModifyDreamTeamController extends DAOImplementation  {
     }
 
     @FXML
-    void handleMainMenuButton(ActionEvent event) throws IOException {
+    private void handleMainMenuButton() throws IOException {
         if (modifyButtonChanged){
             App.alertApp(Alert.AlertType.CONFIRMATION,"Confirmation Dialog",null,"Are you sure you want to go back?\nYour modifications will be deleted!");
         }else{
@@ -288,7 +277,7 @@ public class ModifyDreamTeamController extends DAOImplementation  {
     }
 
     @FXML
-    void handleBackButton(ActionEvent event) throws IOException {
+     private void handleBackButton() throws IOException {
         if (modifyButtonChanged){
             App.alertApp(Alert.AlertType.CONFIRMATION,"Confirmation Dialog",null,"Are you sure you want to go back?\nYour modifications will be deleted!");
         }else{

@@ -1,6 +1,5 @@
 package org.ttbdlk;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
@@ -20,8 +19,8 @@ public class SearchTeamController extends DAOImplementation{
     @FXML
     private ComboBox<String> divisionComboBox;
 
-    ArrayList<Team> teams;
-    String sortingValue;
+    private ArrayList<Team> teams;
+    private String sortingValue;
 
     private void fillTheTeamList()  throws IOException{
         teams = GetTeamsData();
@@ -29,8 +28,8 @@ public class SearchTeamController extends DAOImplementation{
             App.alertApp(Alert.AlertType.WARNING, "Database error!", "", "Something went wrong with the database!");
         }else{
             TeamListView.getItems().clear();
-            for (int i = 0; i < teams.size(); i++) {
-                TeamListView.getItems().add(teams.get(i));
+            for (Team team : teams) {
+                TeamListView.getItems().add(team);
             }
         }
 
@@ -45,34 +44,34 @@ public class SearchTeamController extends DAOImplementation{
     }
 
     @FXML
-    void handleSelectionChangedDivisionComboBox(ActionEvent event) {
+    private void handleSelectionChangedDivisionComboBox() {
         sortingValue = divisionComboBox.getSelectionModel().getSelectedItem();
     }
 
     @FXML
-    void handleButtonSearchPushed(ActionEvent event) throws IOException {
+    private void handleButtonSearchPushed() throws IOException {
         String criteria = searchTeamTextField.getText();
         if(criteria.equals("") && sortingValue.equals("none")){
             App.alertApp(Alert.AlertType.WARNING, "Add searching criteria!", "", "You need to add one or more criterias to search!");
         }else if(sortingValue.equals("none")){
             TeamListView.getItems().clear();
-            for (int i = 0; i < teams.size(); i++) {
-                if (teams.get(i).getName().toLowerCase().contains(criteria.toLowerCase())) {
-                    TeamListView.getItems().add(teams.get(i));
+            for (Team team : teams) {
+                if (team.getName().toLowerCase().contains(criteria.toLowerCase())) {
+                    TeamListView.getItems().add(team);
                 }
             }
         }else {
             TeamListView.getItems().clear();
-            for (int i = 0; i < teams.size(); i++) {
-                if (teams.get(i).getName().toLowerCase().contains(criteria.toLowerCase()) && sortingValue.equals(teams.get(i).getDivision())) {
-                    TeamListView.getItems().add(teams.get(i));
+            for (Team team : teams) {
+                if (team.getName().toLowerCase().contains(criteria.toLowerCase()) && sortingValue.equals(team.getDivision())) {
+                    TeamListView.getItems().add(team);
                 }
             }
         }
     }
 
     @FXML
-    void handleButtonViewPushed(ActionEvent event) throws IOException {
+    private void handleButtonViewPushed() throws IOException {
         Team team = TeamListView.getSelectionModel().getSelectedItem();
         if(team == null){
             App.alertApp(Alert.AlertType.WARNING, "Select player!", "", "You need to select a player from the list to check it out!");
@@ -84,10 +83,10 @@ public class SearchTeamController extends DAOImplementation{
     }
 
     @FXML
-    void handleButtonBackPushed(ActionEvent event) throws IOException {
+    private void handleButtonBackPushed() throws IOException {
         App.setRoot("primary");
     }
-    public void onEnter(ActionEvent event) throws IOException {
-        handleButtonSearchPushed(event);
+    public void onEnter() throws IOException {
+        handleButtonSearchPushed();
     }
 }

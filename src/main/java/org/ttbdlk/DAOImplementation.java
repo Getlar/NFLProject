@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class DAOImplementation implements DAO{
-    private Connection connection;
     private Statement statement;
     private ResultSet resultset;
 
@@ -16,7 +15,7 @@ public class DAOImplementation implements DAO{
     public void DbConnect() throws IOException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/nfl", "root", "");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/nfl", "root", "");
             statement = connection.createStatement();
         }
         catch (Exception ex){
@@ -65,11 +64,6 @@ public class DAOImplementation implements DAO{
                         resultset.getString("headCoach"),
                         resultset.getString("owner")
                 ));
-
-                String name = resultset.getString("name");
-                String division = resultset.getString("division");
-                String owner = resultset.getString("owner");
-
             }
         } catch (Exception ex) {
             App.alertApp(Alert.AlertType.ERROR,"DataBase Error!", "DataBase Error!","There was a problem with our Database. Process aborted!");
@@ -263,7 +257,7 @@ public class DAOImplementation implements DAO{
                    result=Integer.parseInt(resultset.getString(1));
                 }
                 if(result==out.getPick()){
-                    query="UPDATE dreamteams SET 'Player"+(i+1)+"' "+in.getPick()+"WHERE 'Player"+(i+1)+" = "+out.getPick()+";";
+                    query="UPDATE dreamteams SET 'Player"+(i+1)+"' "+in.getPick()+"WHERE Player"+(i+1)+" = "+out.getPick()+";";
                     try{
                         statement.executeQuery(query);
                     }catch (Exception ex){

@@ -1,6 +1,5 @@
 package org.ttbdlk;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 import java.io.IOException;
@@ -81,7 +80,7 @@ public class PlayerDataController extends DAOImplementation{
     }
 
     @FXML
-    void handleButtonBackPushed(ActionEvent event) throws IOException {
-        App.setRoot("searchTeam");
+    private void handleButtonBackPushed() throws IOException {
+        App.setRoot("searchPlayer");
     }
 }
