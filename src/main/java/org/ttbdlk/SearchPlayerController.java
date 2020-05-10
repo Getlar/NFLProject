@@ -117,41 +117,48 @@ public class SearchPlayerController extends DAOImplementation{
 
     @FXML
     private void handleButtonSearchPushed() throws IOException {
-        String criteria = searchTeamTextField.getText();
-        PlayerListView.getItems().clear();
-        if(criteria.equals("") && positionSortingValue.equals("none") && collegeSortingValue.equals("none")){
-            App.alertApp(Alert.AlertType.WARNING, "Add searching criteria!", "", "You need to add one or more criterias to search!");
-        }else if(collegeSortingValue.equals("none") && positionSortingValue.equals("none")){
+        if(!searchTeamTextField.getText().equals("")) {
+            if (teamNameIsValid(searchTeamTextField.getText())) {
+                String criteria = searchTeamTextField.getText();
+                PlayerListView.getItems().clear();
+                if (criteria.equals("") && positionSortingValue.equals("none") && collegeSortingValue.equals("none")) {
+                    App.alertApp(Alert.AlertType.WARNING, "Add searching criteria!", "", "You need to add one or more criterias to search!");
+                } else if (collegeSortingValue.equals("none") && positionSortingValue.equals("none")) {
 
-            for (Player player : players) {
-                if (player.getName().toLowerCase().contains(criteria.toLowerCase())) {
-                    PlayerListView.getItems().add(player);
-                }
-            }
-        }else if(!collegeSortingValue.equals("none") && positionSortingValue.equals("none")){
-            for (Player player : players) {
-                if (player.getName().toLowerCase().contains(criteria.toLowerCase())
-                        && collegeSortingValue.equals(player.getCollege())) {
-                    PlayerListView.getItems().add(player);
-                }
-            }
-        }else if(collegeSortingValue.equals("none")){
-            for (Player player : players) {
-                if (player.getName().toLowerCase().contains(criteria.toLowerCase())
-                        && positionSortingValue.equals(player.getPosition())) {
-                    PlayerListView.getItems().add(player);
-                }
-            }
-        }else
-            {
-            PlayerListView.getItems().clear();
-                for (Player player : players) {
-                    if (player.getName().toLowerCase().contains(criteria.toLowerCase())
-                            && positionSortingValue.equals(player.getPosition())
-                            && collegeSortingValue.equals(player.getCollege())) {
-                        PlayerListView.getItems().add(player);
+                    for (Player player : players) {
+                        if (player.getName().toLowerCase().contains(criteria.toLowerCase())) {
+                            PlayerListView.getItems().add(player);
+                        }
+                    }
+                } else if (!collegeSortingValue.equals("none") && positionSortingValue.equals("none")) {
+                    for (Player player : players) {
+                        if (player.getName().toLowerCase().contains(criteria.toLowerCase())
+                                && collegeSortingValue.equals(player.getCollege())) {
+                            PlayerListView.getItems().add(player);
+                        }
+                    }
+                } else if (collegeSortingValue.equals("none")) {
+                    for (Player player : players) {
+                        if (player.getName().toLowerCase().contains(criteria.toLowerCase())
+                                && positionSortingValue.equals(player.getPosition())) {
+                            PlayerListView.getItems().add(player);
+                        }
+                    }
+                } else {
+                    PlayerListView.getItems().clear();
+                    for (Player player : players) {
+                        if (player.getName().toLowerCase().contains(criteria.toLowerCase())
+                                && positionSortingValue.equals(player.getPosition())
+                                && collegeSortingValue.equals(player.getCollege())) {
+                            PlayerListView.getItems().add(player);
+                        }
                     }
                 }
+            }else{
+                App.alertApp(Alert.AlertType.ERROR, "Invalid Name!", null, "Please select a valid player name!");
+            }
+        }else{
+            App.alertApp(Alert.AlertType.ERROR, "Empty Field!", null, "Please fill text field!");
         }
     }
 

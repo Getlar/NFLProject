@@ -10,7 +10,6 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.Optional;
 
 public class App extends Application {
@@ -61,7 +60,7 @@ public class App extends Application {
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
         launch();
     }
 }
