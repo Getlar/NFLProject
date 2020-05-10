@@ -273,6 +273,59 @@ public class DAOImplementation implements DAO{
         }
     }
 
+    @Override
+    public boolean teamNameIsValid(String teamName){
+        String[] token=teamName.split(" ");
+        if(teamName.length()>70){
+            return false;
+        }
+        for(int i=0; i<token.length; i++){
+            if(!Character.isUpperCase(token[i].charAt(0))){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean divisionIsValid(String division){
+        String[] token=division.split(" ");
+        if((token[0].equals("NFC") || token[0].equals("AFC")) && token.length==2){
+            if(token[1].equals("South") || token[1].equals("East") || token[1].equals("North") || token[1].equals("West")){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean ownerNameIsValid(String ownerName){
+        String[] token=ownerName.split(" ");
+        if(ownerName.length()>70){
+            return false;
+        }
+        for(int i=0; i<token.length; i++){
+            if(!Character.isUpperCase(token[i].charAt(0))){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean coachNameIsValid(String coachName){
+        String[] token=coachName.split(" ");
+        if(coachName.length()>70){
+            return false;
+        }
+        for(int i=0; i<token.length; i++){
+            if(!Character.isUpperCase(token[i].charAt(0))){
+                return false;
+            }
+        }
+        return true;
+    }
+
   /*  public void getData(String tableName){
         try {
           String query = "select * from "+tableName;
