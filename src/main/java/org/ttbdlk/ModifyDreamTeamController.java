@@ -128,7 +128,7 @@ public class ModifyDreamTeamController extends DAOImplementation  {
         if (firstPlayer == null || secondPLayer == null){
             App.alertApp(Alert.AlertType.ERROR,"Selection Error!", null, "Please select one player from each team to exchange!");
         }else {
-            if (changeCount != 4) {
+            if (changeCount != 4 ) {
                 exchangePlayerTableView.getItems().remove(firstPlayer);
                 exchangePlayerTableView.getItems().add(secondPLayer);
                 exchangePlayerTableView1.getItems().remove(secondPLayer);
@@ -255,13 +255,17 @@ public class ModifyDreamTeamController extends DAOImplementation  {
             ArrayList<Player> players;
             players = GetPlayersData();
             ObservableList<Player> jatekosok = FXCollections.observableArrayList();
-            jatekosok.addAll(players);
-            exchangePlayerTableView1.setItems(jatekosok);
             ArrayList<Player> dreamPlayers;
             dreamPlayers = getPlayersFromDreamTeam(chosen);
             ObservableList<Player> alomJatekosok = FXCollections.observableArrayList();
+            jatekosok.addAll(players);
             alomJatekosok.addAll(dreamPlayers);
+            for (Player p: dreamPlayers
+            ) {
+                jatekosok.remove(p);
+            }
             exchangePlayerTableView.setItems(alomJatekosok);
+            exchangePlayerTableView1.setItems(jatekosok);
             changeTeamNameTextField.setPromptText("Change Team Name...");
             changeDivisionTextField.setPromptText("Change Division...");
             changeHeadCoachTextField.setPromptText("Change Head Coach...");
@@ -286,7 +290,7 @@ public class ModifyDreamTeamController extends DAOImplementation  {
         if (modifyButtonChanged){
             App.alertApp(Alert.AlertType.CONFIRMATION,"Confirmation Dialog",null,"Are you sure you want to go back?\nYour modifications will be deleted!");
         }else{
-            App.setRoot("primary");
+            App.setRoot("dreamTeam");
         }
     }
 }
