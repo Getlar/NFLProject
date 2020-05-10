@@ -117,8 +117,6 @@ public class SearchPlayerController extends DAOImplementation{
 
     @FXML
     private void handleButtonSearchPushed() throws IOException {
-        if(!searchTeamTextField.getText().equals("")) {
-            if (teamNameIsValid(searchTeamTextField.getText())) {
                 String criteria = searchTeamTextField.getText();
                 PlayerListView.getItems().clear();
                 if (criteria.equals("") && positionSortingValue.equals("none") && collegeSortingValue.equals("none")) {
@@ -154,13 +152,7 @@ public class SearchPlayerController extends DAOImplementation{
                         }
                     }
                 }
-            }else{
-                App.alertApp(Alert.AlertType.ERROR, "Invalid Name!", null, "Please select a valid player name!");
             }
-        }else{
-            App.alertApp(Alert.AlertType.ERROR, "Empty Field!", null, "Please fill text field!");
-        }
-    }
 
     public void onEnter() throws IOException {
         handleButtonSearchPushed();

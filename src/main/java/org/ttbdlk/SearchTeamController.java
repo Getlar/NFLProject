@@ -50,8 +50,6 @@ public class SearchTeamController extends DAOImplementation{
 
     @FXML
     private void handleButtonSearchPushed() throws IOException {
-        if(!searchTeamTextField.getText().equals("")) {
-            if (teamNameIsValid(searchTeamTextField.getText())) {
                 String criteria = searchTeamTextField.getText();
                 if (criteria.equals("") && sortingValue.equals("none")) {
                     App.alertApp(Alert.AlertType.WARNING, "Add searching criteria!", "", "You need to add one or more criterias to search!");
@@ -70,13 +68,7 @@ public class SearchTeamController extends DAOImplementation{
                         }
                     }
                 }
-            } else {
-                App.alertApp(Alert.AlertType.ERROR, "Invalid Name!", null, "Please select a valid team name!");
             }
-        }else {
-            App.alertApp(Alert.AlertType.ERROR, "Empty Field!", null, "Please fill text field!");
-        }
-    }
 
     @FXML
     private void handleButtonViewPushed() throws IOException {
