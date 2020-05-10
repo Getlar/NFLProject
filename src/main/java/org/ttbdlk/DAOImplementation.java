@@ -10,33 +10,7 @@ import java.util.ArrayList;
 public class DAOImplementation implements DAO{
     private Statement statement;
     private ResultSet resultset;
-    //temporary
-    @Override
-    public void updateDataInPlayers(int pick, String name){
-        try{
-            String query="UPDATE players SET Pick = "+pick+"WHERE Name = "+name+";";
-            statement.executeQuery(query);
 
-        }catch (Exception ex){
-            System.out.println("Error: "+ex);
-        }
-    }
-
-    @Override
-    public int height(int feet, int inch){
-        float cm;
-        cm= (float) (feet*30.48+2.54*inch);
-        return Math.round(cm);
-    }
-
-    @Override
-    public int weight(int lbs){
-        float kg;
-        kg=(float) (lbs*0.45359);
-        return Math.round(kg);
-    }
-
-    //temprorary end
     @Override
     public void DbConnect() throws IOException {
         try {
@@ -297,6 +271,59 @@ public class DAOImplementation implements DAO{
                 App.setRoot("primary");
             }
         }
+    }
+
+    @Override
+    public boolean teamNameIsValid(String teamName){
+        String[] token=teamName.split(" ");
+        if(teamName.length()>70){
+            return false;
+        }
+        for(int i=0; i<token.length; i++){
+            if(!Character.isUpperCase(token[i].charAt(0))){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean divisionIsValid(String division){
+        String[] token=division.split(" ");
+        if((token[0].equals("NFC") || token[0].equals("AFC")) && token.length==2){
+            if(token[1].equals("South") || token[1].equals("East") || token[1].equals("North") || token[1].equals("West")){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean ownerNameIsValid(String ownerName){
+        String[] token=ownerName.split(" ");
+        if(ownerName.length()>70){
+            return false;
+        }
+        for(int i=0; i<token.length; i++){
+            if(!Character.isUpperCase(token[i].charAt(0))){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean coachNameIsValid(String coachName){
+        String[] token=coachName.split(" ");
+        if(coachName.length()>70){
+            return false;
+        }
+        for(int i=0; i<token.length; i++){
+            if(!Character.isUpperCase(token[i].charAt(0))){
+                return false;
+            }
+        }
+        return true;
     }
 
   /*  public void getData(String tableName){

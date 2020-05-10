@@ -1,0 +1,6 @@
+coachName, expected
+Takács Tamás, true
+Béres Dávid, true
+Lovász kristóf, false
+Sean McVay, true
+Adam gaASE, false
