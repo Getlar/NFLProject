@@ -50,23 +50,31 @@ public class SearchTeamController extends DAOImplementation{
 
     @FXML
     private void handleButtonSearchPushed() throws IOException {
-        String criteria = searchTeamTextField.getText();
-        if(criteria.equals("") && sortingValue.equals("none")){
-            App.alertApp(Alert.AlertType.WARNING, "Add searching criteria!", "", "You need to add one or more criterias to search!");
-        }else if(sortingValue.equals("none")){
-            TeamListView.getItems().clear();
-            for (Team team : teams) {
-                if (team.getName().toLowerCase().contains(criteria.toLowerCase())) {
-                    TeamListView.getItems().add(team);
+        if(!searchTeamTextField.getText().equals("")) {
+            if (teamNameIsValid(searchTeamTextField.getText())) {
+                String criteria = searchTeamTextField.getText();
+                if (criteria.equals("") && sortingValue.equals("none")) {
+                    App.alertApp(Alert.AlertType.WARNING, "Add searching criteria!", "", "You need to add one or more criterias to search!");
+                } else if (sortingValue.equals("none")) {
+                    TeamListView.getItems().clear();
+                    for (Team team : teams) {
+                        if (team.getName().toLowerCase().contains(criteria.toLowerCase())) {
+                            TeamListView.getItems().add(team);
+                        }
+                    }
+                } else {
+                    TeamListView.getItems().clear();
+                    for (Team team : teams) {
+                        if (team.getName().toLowerCase().contains(criteria.toLowerCase()) && sortingValue.equals(team.getDivision())) {
+                            TeamListView.getItems().add(team);
+                        }
+                    }
                 }
+            } else {
+                App.alertApp(Alert.AlertType.ERROR, "Invalid Name!", null, "Please select a valid team name!");
             }
         }else {
-            TeamListView.getItems().clear();
-            for (Team team : teams) {
-                if (team.getName().toLowerCase().contains(criteria.toLowerCase()) && sortingValue.equals(team.getDivision())) {
-                    TeamListView.getItems().add(team);
-                }
-            }
+            App.alertApp(Alert.AlertType.ERROR, "Empty Field!", null, "Please fill text field!");
         }
     }
 

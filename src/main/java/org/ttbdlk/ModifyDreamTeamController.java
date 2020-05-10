@@ -2,11 +2,9 @@ package org.ttbdlk;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -165,9 +163,16 @@ public class ModifyDreamTeamController extends DAOImplementation  {
         if (teamDivision.equals("")){
             teamDivision = chosen.getDivision();
         }
-        if(!teamDivisions.contains(teamDivision)){
+        if(!teamNameIsValid(changeTeamNameTextField.getText())){
+            App.alertApp(Alert.AlertType.ERROR, "Team Name Error!", null, "You Team Name has an invalid format.");
+        }else if(!divisionIsValid(changeDivisionTextField.getText())){
             App.alertApp(Alert.AlertType.ERROR, "Team Division Error!", null, "Your division does not exist. Selection examples: AFC North, NFC West etc.");
-        }else {
+        }else if(!ownerNameIsValid(changeOwnerTextField.getText())){
+            App.alertApp(Alert.AlertType.ERROR, "Team Owner Error!", null, "You Team Owner has an invalid format.");
+        }else if(!coachNameIsValid(changeHeadCoachTextField.getText())){
+            App.alertApp(Alert.AlertType.ERROR, "Team Head Coach Error!", null, "You Team Head Coach has an invalid format.");
+        }
+        else {
             Team newTeam = new Team(teamName, teamDivision, teamCoach, teamOwner);
             StringBuilder sb = new StringBuilder();
             sb.append("Are you sure you want to apply these changes?\n").append("Team Name: ").append(chosen.getName()).append(" -> ").append(teamName).append("\n").append("Team Division: ").append(chosen.getDivision()).append(" -> ").append(teamDivision).append("\n").append("Team Head Coach: ").append(chosen.getHeadCoach()).append(" -> ").append(teamCoach).append("\n").append("Team Owner: ").append(chosen.getOwner()).append(" -> ").append(teamOwner);

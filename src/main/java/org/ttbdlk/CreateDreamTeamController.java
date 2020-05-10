@@ -2,11 +2,9 @@ package org.ttbdlk;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -95,9 +93,16 @@ public class CreateDreamTeamController extends  DAOImplementation{
         else if (teamNameTextField.getText().equals("") || teamOwnerTextField.getText().equals("") || teamHeadCoachTextField.getText().equals("") || teamDivisionTextField.getText().equals("")){
             App.alertApp(Alert.AlertType.ERROR, "Not All Parameters Specified!", null, "Please specify all the given parameters!");
         }
-        else if(!teamDivisions.contains(teamDivisionTextField.getText())){
+        else if(!teamNameIsValid(teamNameTextField.getText())){
+            App.alertApp(Alert.AlertType.ERROR, "Team Name Error!", null, "You Team Name has an invalid format.");
+        }else if(!divisionIsValid(teamDivisionTextField.getText())){
             App.alertApp(Alert.AlertType.ERROR, "Team Division Error!", null, "Your division does not exist. Selection examples: AFC North, NFC West etc.");
-        }else{
+        }else if(!ownerNameIsValid(teamOwnerTextField.getText())){
+            App.alertApp(Alert.AlertType.ERROR, "Team Owner Error!", null, "You Team Owner has an invalid format.");
+        }else if(!coachNameIsValid(teamHeadCoachTextField.getText())){
+            App.alertApp(Alert.AlertType.ERROR, "Team Head Coach Error!", null, "You Team Head Coach has an invalid format.");
+        }
+        else{
             tableSetup(nameColumn, collegeColumn, positionColumn, dobColumn, weightColumn, heightColumn, teamColumn, nameColumn1, collegeColumn1, positionColumn1, dobColumn1, weightColumn1, heightColumn1, teamColumn1);
             teamNameTextField.setPromptText("Team Name...");
             teamDivisionTextField.setPromptText("Team Division...");
